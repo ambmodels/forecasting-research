@@ -1,0 +1,72 @@
+---
+title: Forecasting
+bibliography: references.bib
+---
+
+Forecasting is the process of using historical data to make predictions about future values. It applies statistical models to historical patterns, and projects those patterns forwards in time.
+
+## The forecasting process
+
+### Steps of a forecasting project
+
+<span class="source-note">@monks_intro_to_forecasting</span>
+
+1. **Define the problem** (what we are forecasting and how it will be used).
+2. **Collect time series data**
+3. **Explore and visulise the data**
+4. **Fit a range of candidate models**
+5. **Evaluate and choose the best models** (using error metrics).
+6. **Generate the forecast** (using the best model).
+
+### Questions to ask when defining the problem
+
+<span class="source-note">@monks_intro_to_forecasting, @hsma_intro_to_forecasting</span>
+
+* **What decisions will forecasting support?** (e.g., short term operational? long term? future resource requirements?).
+* **Do you need to forecast one quantity or many** (i.e., total demand, v.s., demand broken down by age group or region).
+* **How accurate does forecast need to be to support decisions?**
+* **How far ahead do you need to forecast?**
+* **What is the frequency of your data, and how often do you need new forecasts** (i.e., cannot produce daily forecasts from monthly data).
+
+## Time series data
+
+<span class="source-note">@monks_intro_to_forecasting</span>
+
+A times series is a sequence of observations recorded at regular intervals over time. Features of a time series:
+
+* **Trend** - the long-term underlying direction of values, independent of short-term fluctuations.
+* **Seasonality** - a repeating pattern at fixed times - e.g., high demand on weekends.
+* **Mean** - average level of the series.
+* **Variance** - how spread out the vales are around the mean.
+
+There are also two more complicated properties explained below:
+
+* **Stationarity**
+* **Autocorrelation**
+
+### Stationarity
+
+<span class="source-note">@monks_arima</span>
+
+A stationary time series has:
+
+* No trend.
+* No seasonality.
+* Stable variance.
+
+This is uncommon for healthcare datasets.
+
+### Autocorrelation
+
+<span class="source-note">@tds_autocorrelation</span>
+
+Autocorrelation is the correlation of data with itself, at two different points in time (known as lags) - so we are measuring how a data point relates to its own past self at different lags.
+
+For example, if a busy Sunday is often be followed by a busy Monday.
+
+It can also be used to help detect seasonality.
+
+## References
+
+::: {#refs}
+:::
