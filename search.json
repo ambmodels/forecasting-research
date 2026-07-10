@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Forecasting",
+    "section": "",
+    "text": "Forecasting is the process of using historical data to make predictions about future values. It applies statistical models to historical patterns, and projects those patterns forwards in time."
+  },
+  {
+    "objectID": "index.html#the-forecasting-process",
+    "href": "index.html#the-forecasting-process",
+    "title": "Forecasting",
+    "section": "The forecasting process",
+    "text": "The forecasting process\n\nSteps of a forecasting project\nMonks (2020a)\n\nDefine the problem (what we are forecasting and how it will be used).\nCollect time series data\nExplore and visulise the data\nFit a range of candidate models\nEvaluate and choose the best models (using error metrics).\nGenerate the forecast (using the best model).\n\n\n\nQuestions to ask when defining the problem\nMonks (2020a), HSMA (2024)\n\nWhat decisions will forecasting support? (e.g., short term operational? long term? future resource requirements?).\nDo you need to forecast one quantity or many (i.e., total demand, v.s., demand broken down by age group or region).\nHow accurate does forecast need to be to support decisions?\nHow far ahead do you need to forecast?\nWhat is the frequency of your data, and how often do you need new forecasts (i.e., cannot produce daily forecasts from monthly data)."
+  },
+  {
+    "objectID": "index.html#time-series-data",
+    "href": "index.html#time-series-data",
+    "title": "Forecasting",
+    "section": "Time series data",
+    "text": "Time series data\nMonks (2020a)\nA times series is a sequence of observations recorded at regular intervals over time. Features of a time series:\n\nTrend - the long-term underlying direction of values, independent of short-term fluctuations.\nSeasonality - a repeating pattern at fixed times - e.g., high demand on weekends.\nMean - average level of the series.\nVariance - how spread out the vales are around the mean.\n\nThere are also two more complicated properties explained below:\n\nStationarity\nAutocorrelation\n\n\nStationarity\nMonks (2020b)\nA stationary time series has:\n\nNo trend.\nNo seasonality.\nStable variance.\n\nThis is uncommon for healthcare datasets.\n\n\nAutocorrelation\nHowell (2022)\nAutocorrelation is the correlation of data with itself, at two different points in time (known as lags) - so we are measuring how a data point relates to its own past self at different lags.\nFor example, if a busy Sunday is often be followed by a busy Monday.\nIt can also be used to help detect seasonality."
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Forecasting",
+    "section": "References",
+    "text": "References\n\n\nHowell, Egor. 2022. Autocorrelation for Time Series Analysis. https://towardsdatascience.com/autocorrelation-for-time-series-analysis-86e68e631f77/.\n\n\nHSMA. 2024. 8B Forecasting: Part 1 - Intro to Forecasting. https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%201%20-%20Intro%20to%20Forecasting.pdf.\n\n\nMonks, Tom. 2020a. An Introduction to Forecasting in Health. https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/.\n\n\nMonks, Tom. 2020b. Modelling Health System Demand Using ARIMA. https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w."
+  }
+]
