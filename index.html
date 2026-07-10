@@ -149,8 +149,20 @@ div.csl-indent {
   <li><a href="#percentagerelative-errors" id="toc-percentagerelative-errors" class="nav-link" data-scroll-target="#percentagerelative-errors">Percentage/relative errors</a></li>
   <li><a href="#scaled-errors" id="toc-scaled-errors" class="nav-link" data-scroll-target="#scaled-errors">Scaled errors</a></li>
   </ul></li>
-  <li><a href="#evaluating-forecast-accuracy-prediction-intervals" id="toc-evaluating-forecast-accuracy-prediction-intervals" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-prediction-intervals">Evaluating forecast accuracy: prediction intervals</a></li>
-  <li><a href="#evaluating-forecast-accuracy-data-sets" id="toc-evaluating-forecast-accuracy-data-sets" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-data-sets">Evaluating forecast accuracy: data sets</a></li>
+  <li><a href="#evaluating-forecast-accuracy-prediction-intervals" id="toc-evaluating-forecast-accuracy-prediction-intervals" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-prediction-intervals">Evaluating forecast accuracy: prediction intervals</a>
+  <ul class="collapse">
+  <li><a href="#empirical-coverage" id="toc-empirical-coverage" class="nav-link" data-scroll-target="#empirical-coverage">Empirical coverage</a></li>
+  <li><a href="#absolute-coverage-difference-acd" id="toc-absolute-coverage-difference-acd" class="nav-link" data-scroll-target="#absolute-coverage-difference-acd">Absolute coverage difference (ACD)</a></li>
+  <li><a href="#winkler-score-or-interval-score" id="toc-winkler-score-or-interval-score" class="nav-link" data-scroll-target="#winkler-score-or-interval-score">Winkler score (or interval score)</a></li>
+  <li><a href="#scaled-interval-score" id="toc-scaled-interval-score" class="nav-link" data-scroll-target="#scaled-interval-score">Scaled interval score</a></li>
+  </ul></li>
+  <li><a href="#evaluating-forecast-accuracy-data-sets" id="toc-evaluating-forecast-accuracy-data-sets" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-data-sets">Evaluating forecast accuracy: data sets</a>
+  <ul class="collapse">
+  <li><a href="#train-test-split" id="toc-train-test-split" class="nav-link" data-scroll-target="#train-test-split">Train-test split</a></li>
+  <li><a href="#train-validation-test-split" id="toc-train-validation-test-split" class="nav-link" data-scroll-target="#train-validation-test-split">Train-validation-test-split</a></li>
+  <li><a href="#cross-validation-with-rolling-forecast-origin" id="toc-cross-validation-with-rolling-forecast-origin" class="nav-link" data-scroll-target="#cross-validation-with-rolling-forecast-origin">Cross-validation with rolling forecast origin</a></li>
+  <li><a href="#cross-validation-with-sliding-window-fixed-train-size" id="toc-cross-validation-with-sliding-window-fixed-train-size" class="nav-link" data-scroll-target="#cross-validation-with-sliding-window-fixed-train-size">Cross-validation with sliding window (fixed train size)</a></li>
+  </ul></li>
   <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations">Transformations</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -318,26 +330,37 @@ div.csl-indent {
 </section>
 <section id="evaluating-forecast-accuracy-prediction-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="evaluating-forecast-accuracy-prediction-intervals">Evaluating forecast accuracy: prediction intervals</h2>
-<p><span class="source-note">Sources: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span>, <span class="citation" data-cites="monks_winkler">Monks (<a href="#ref-monks_winkler" role="doc-biblioref">2025</a>)</span>, <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2021</a>)</span></span></p>
+<p><span class="source-note">Sources: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span>, <span class="citation" data-cites="monks_winkler">Monks (<a href="#ref-monks_winkler" role="doc-biblioref">2025b</a>)</span>, <span class="citation" data-cites="monks_prediction">Monks (<a href="#ref-monks_prediction" role="doc-biblioref">2025a</a>)</span>, <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2021</a>)</span></span></p>
 <p>A <strong>prediction interval</strong> is the range that we expect to contain the true value, with some confidence (e.g., 95%). They express the <strong>uncertainty</strong> in forecasts. There are various methods used to calculate prediction intervals. We can evaluate <em>how good the prediction intervals are</em> - the <strong>prediction interval (distributional) forecast accuracy</strong>.</p>
-<p><strong>Empirical coverage</strong> - the proportion of actual values that fell inside the predicted interval.</p>
+<section id="empirical-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="empirical-coverage">Empirical coverage</h3>
+<p>The proportion of actual values that fell inside the predicted interval.</p>
 <ul>
 <li>✅ Simple and intuitive.</li>
 <li>❌ Says nothing about how <em>wide</em> the interval is - a model with huge intervals could have near 100% coverage while being useless in practice.</li>
 </ul>
-<p><strong>Absolute coverage difference (ACD)</strong> - compare actual achieved coverage (e.g., 93%) against target coverage (e.g., 95%) and take the absolute difference (e.g., 0.02).</p>
+</section>
+<section id="absolute-coverage-difference-acd" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-coverage-difference-acd">Absolute coverage difference (ACD)</h3>
+<p>Compare actual achieved coverage (e.g., 93%) against target coverage (e.g., 95%) and take the absolute difference (e.g., 0.02).</p>
 <ul>
 <li>✅ Intuitive.</li>
 <li>❌ Still says nothing about interval width.</li>
 <li>❌ Symmetric - don’t know if it was too narrow (overconfident) or too wide (underconfident). Overconfidence is usually the more serious problem.</li>
 </ul>
-<p><strong>Winkler score (or interval score)</strong> - evaluates the quality of prediction intervals by balancing the interval width (narrow intervals are more useful) and coverage accuracy (ensuring observations stay within the predicted range). The score is the width of the prediction interval, plus a penalty that is applied if the observation falls outside the preidction interval. The penalty is proportional tot he deviation.</p>
+</section>
+<section id="winkler-score-or-interval-score" class="level3">
+<h3 class="anchored" data-anchor-id="winkler-score-or-interval-score">Winkler score (or interval score)</h3>
+<p>Evaluates the quality of prediction intervals by balancing the interval width (narrow intervals are more useful) and coverage accuracy (ensuring observations stay within the predicted range). The score is the width of the prediction interval, plus a penalty that is applied if the observation falls outside the preidction interval. The penalty is proportional tot he deviation.</p>
 <ul>
 <li>✅ Balances width and accuracy. Proper scoring rule - i.e., can’t improve expected score by deliberately widening or narrowing the interval.</li>
 <li>❌ Scale-dependent.</li>
 <li>❌ Hard to interpret on it’s own - only makes sense relative to other scores on the same series.</li>
 </ul>
-<p><strong>Scaled interval score</strong> - the average Winkler score divided by the one-step in-sample Naïve1 or SNaïve.</p>
+</section>
+<section id="scaled-interval-score" class="level3">
+<h3 class="anchored" data-anchor-id="scaled-interval-score">Scaled interval score</h3>
+<p>The average Winkler score divided by the one-step in-sample Naïve1 or SNaïve.</p>
 <ul>
 <li>✅ Scale-independent.</li>
 <li>✅ Benchmarks against a naive forecast, so a score below 1 tells you the model’s intervals genuinely outperform a naive interval.</li>
@@ -345,8 +368,58 @@ div.csl-indent {
 <li>❌ If in-sample naive error is very small or close to zero, the scaled score can be unstable or misleadingly large.</li>
 </ul>
 </section>
+</section>
 <section id="evaluating-forecast-accuracy-data-sets" class="level2">
 <h2 class="anchored" data-anchor-id="evaluating-forecast-accuracy-data-sets">Evaluating forecast accuracy: data sets</h2>
+<section id="train-test-split" class="level3">
+<h3 class="anchored" data-anchor-id="train-test-split">Train-test split</h3>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
+<p>Split the data into a training set (used to fit the model) and a test set (used to evaluate it).</p>
+<ul>
+<li>✅ Simple.</li>
+<li>✅ Doesn’t need much data.</li>
+<li>❌ Gives only a single estimate of forecast error.</li>
+<li>❌ Repeated model selection on the same test set can cause overfitting on that particular held-out period.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>What is overfitting?</strong> Overfitting is a problem that occurs when an algorithm learns the training data “too well”. This means it performs very well on training training data, but poorly on new unseen data.</p>
+</blockquote>
+</section>
+<section id="train-validation-test-split" class="level3">
+<h3 class="anchored" data-anchor-id="train-validation-test-split">Train-validation-test-split</h3>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
+<p>Add a validation set between training and test. The validation set is used to select and tune your model, then the final error estimate is reported on the untouched test set.</p>
+<ul>
+<li>✅ Test set is only used once, giving a fairer estimate of real world error.</li>
+<li>❌ Gives only a single estimate of forecast error.</li>
+<li>❌ Requires a longer time series.</li>
+</ul>
+</section>
+<section id="cross-validation-with-rolling-forecast-origin" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-with-rolling-forecast-origin">Cross-validation with rolling forecast origin</h3>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
+<p>Instead of one split, you create many overlapping sets of train/test or train/validation/test splits by repeatedly moving the “origin” point forward through the data.</p>
+<ul>
+<li>✅ Many error estimates, not just one, giving a more reliable picture of model performance.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rolling_forecast_origin.png" class="img-fluid figure-img"></p>
+<figcaption>Cross-validation with rolling forecast origin. Image from <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span> (CC-BY).</figcaption>
+</figure>
+</div>
+</section>
+<section id="cross-validation-with-sliding-window-fixed-train-size" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-with-sliding-window-fixed-train-size">Cross-validation with sliding window (fixed train size)</h3>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span>, <span class="citation" data-cites="monks_crossvalidation">Monks (<a href="#ref-monks_crossvalidation" role="doc-biblioref">2025c</a>)</span></span></p>
+<p>A variant where instead of expanding the training window, you slide a fixed-size window forward, so older data is dropped from training as new data is added. Useful when you believe very old data is less relevant.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sliding_window.png" class="img-fluid figure-img"></p>
+<figcaption>Cross-validation with sliding window. Image from <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span> (CC-BY).</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="transformations" class="level2">
 <h2 class="anchored" data-anchor-id="transformations">Transformations</h2>
@@ -372,8 +445,14 @@ Monks, Tom. 2020a. <em>An Introduction to Forecasting in Health</em>. <a href="h
 <div id="ref-monks_arima" class="csl-entry" role="listitem">
 Monks, Tom. 2020b. <em>Modelling Health System Demand Using ARIMA</em>. <a href="https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w">https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w</a>.
 </div>
+<div id="ref-monks_prediction" class="csl-entry" role="listitem">
+Monks, Tom. 2025a. <em>Evaluating a Prediction Interval</em>. <a href="https://tommonks.github.io/forecast-tools/content/02a_coverage_metrics.html">https://tommonks.github.io/forecast-tools/content/02a_coverage_metrics.html</a>.
+</div>
 <div id="ref-monks_winkler" class="csl-entry" role="listitem">
-Monks, Tom. 2025. <em>How to Evaluate Forecast Prediction Intervals with the Winkler Score</em>. <a href="https://github.com/TheOpenScienceNerd/winkler_score">https://github.com/TheOpenScienceNerd/winkler_score</a>.
+Monks, Tom. 2025b. <em>How to Evaluate Forecast Prediction Intervals with the Winkler Score</em>. <a href="https://github.com/TheOpenScienceNerd/winkler_score">https://github.com/TheOpenScienceNerd/winkler_score</a>.
+</div>
+<div id="ref-monks_crossvalidation" class="csl-entry" role="listitem">
+Monks, Tom. 2025c. <em>Time Series Cross Validation</em>. <a href="https://tommonks.github.io/forecast-tools/content/03_cross_validation.html">https://tommonks.github.io/forecast-tools/content/03_cross_validation.html</a>.
 </div>
 <div id="ref-suleman_metrics" class="csl-entry" role="listitem">
 Suleman, Eshban. 2024. <em>Understanding Evaluation Metrics for Time Series Forecasting</em>. <a href="https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654">https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654</a>.
