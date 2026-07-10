@@ -13,3 +13,4 @@ format:
   html:
     theme: [simplex, theme.scss]
     css: style.css
+    toc: true
