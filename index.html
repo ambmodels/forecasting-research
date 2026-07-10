@@ -61,7 +61,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ac2b1321dbb6ba7aac6d6f2f1f8de02.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6b0df6aa2b84c4d46972941574d12e32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -94,7 +94,7 @@ div.csl-indent {
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -127,7 +127,35 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-forecasting-process" id="toc-the-forecasting-process" class="nav-link active" data-scroll-target="#the-forecasting-process">The forecasting process</a>
+  <ul class="collapse">
+  <li><a href="#steps-of-a-forecasting-project" id="toc-steps-of-a-forecasting-project" class="nav-link" data-scroll-target="#steps-of-a-forecasting-project">Steps of a forecasting project</a></li>
+  <li><a href="#questions-to-ask-when-defining-the-problem" id="toc-questions-to-ask-when-defining-the-problem" class="nav-link" data-scroll-target="#questions-to-ask-when-defining-the-problem">Questions to ask when defining the problem</a></li>
+  </ul></li>
+  <li><a href="#time-series-data" id="toc-time-series-data" class="nav-link" data-scroll-target="#time-series-data">Time series data</a>
+  <ul class="collapse">
+  <li><a href="#stationarity" id="toc-stationarity" class="nav-link" data-scroll-target="#stationarity">Stationarity</a></li>
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation">Autocorrelation</a></li>
+  </ul></li>
+  <li><a href="#naive-benchmark-models" id="toc-naive-benchmark-models" class="nav-link" data-scroll-target="#naive-benchmark-models">Naive benchmark models</a></li>
+  <li><a href="#evaluating-forecast-accuracy-forecast-error" id="toc-evaluating-forecast-accuracy-forecast-error" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-forecast-error">Evaluating forecast accuracy: forecast error</a>
+  <ul class="collapse">
+  <li><a href="#scale-dependent-errors" id="toc-scale-dependent-errors" class="nav-link" data-scroll-target="#scale-dependent-errors">Scale-dependent errors</a></li>
+  <li><a href="#percentagerelative-errors" id="toc-percentagerelative-errors" class="nav-link" data-scroll-target="#percentagerelative-errors">Percentage/relative errors</a></li>
+  <li><a href="#scaled-errors" id="toc-scaled-errors" class="nav-link" data-scroll-target="#scaled-errors">Scaled errors</a></li>
+  </ul></li>
+  <li><a href="#evaluating-forecast-accuracy-prediction-intervals" id="toc-evaluating-forecast-accuracy-prediction-intervals" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-prediction-intervals">Evaluating forecast accuracy: prediction intervals</a></li>
+  <li><a href="#evaluating-forecast-accuracy-data-sets" id="toc-evaluating-forecast-accuracy-data-sets" class="nav-link" data-scroll-target="#evaluating-forecast-accuracy-data-sets">Evaluating forecast accuracy: data sets</a></li>
+  <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations">Transformations</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -155,7 +183,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="the-forecasting-process">The forecasting process</h2>
 <section id="steps-of-a-forecasting-project" class="level3">
 <h3 class="anchored" data-anchor-id="steps-of-a-forecasting-project">Steps of a forecasting project</h3>
-<p><span class="source-note"><span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
 <ol type="1">
 <li><strong>Define the problem</strong> (what we are forecasting and how it will be used).</li>
 <li><strong>Collect time series data</strong></li>
@@ -167,7 +195,7 @@ div.csl-indent {
 </section>
 <section id="questions-to-ask-when-defining-the-problem" class="level3">
 <h3 class="anchored" data-anchor-id="questions-to-ask-when-defining-the-problem">Questions to ask when defining the problem</h3>
-<p><span class="source-note"><span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span>, <span class="citation" data-cites="hsma_intro_to_forecasting">HSMA (<a href="#ref-hsma_intro_to_forecasting" role="doc-biblioref">2024</a>)</span></span></p>
+<p><span class="source-note">Sources: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span>, <span class="citation" data-cites="hsma_intro_to_forecasting">HSMA (<a href="#ref-hsma_intro_to_forecasting" role="doc-biblioref">2024</a>)</span></span></p>
 <ul>
 <li><strong>What decisions will forecasting support?</strong> (e.g., short term operational? long term? future resource requirements?).</li>
 <li><strong>Do you need to forecast one quantity or many</strong> (i.e., total demand, v.s., demand broken down by age group or region).</li>
@@ -179,7 +207,7 @@ div.csl-indent {
 </section>
 <section id="time-series-data" class="level2">
 <h2 class="anchored" data-anchor-id="time-series-data">Time series data</h2>
-<p><span class="source-note"><span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span></span></p>
 <p>A times series is a sequence of observations recorded at regular intervals over time. Features of a time series:</p>
 <ul>
 <li><strong>Trend</strong> - the long-term underlying direction of values, independent of short-term fluctuations.</li>
@@ -194,7 +222,7 @@ div.csl-indent {
 </ul>
 <section id="stationarity" class="level3">
 <h3 class="anchored" data-anchor-id="stationarity">Stationarity</h3>
-<p><span class="source-note"><span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020b</a>)</span></span></p>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020b</a>)</span></span></p>
 <p>A stationary time series has:</p>
 <ul>
 <li>No trend.</li>
@@ -205,11 +233,99 @@ div.csl-indent {
 </section>
 <section id="autocorrelation" class="level3">
 <h3 class="anchored" data-anchor-id="autocorrelation">Autocorrelation</h3>
-<p><span class="source-note"><span class="citation" data-cites="tds_autocorrelation">Howell (<a href="#ref-tds_autocorrelation" role="doc-biblioref">2022</a>)</span></span></p>
+<p><span class="source-note">Source: <span class="citation" data-cites="tds_autocorrelation">Howell (<a href="#ref-tds_autocorrelation" role="doc-biblioref">2022</a>)</span></span></p>
 <p>Autocorrelation is the correlation of data with itself, at two different points in time (known as lags) - so we are measuring how a data point relates to its own past self at different lags.</p>
 <p>For example, if a busy Sunday is often be followed by a busy Monday.</p>
 <p>It can also be used to help detect seasonality.</p>
 </section>
+</section>
+<section id="naive-benchmark-models" class="level2">
+<h2 class="anchored" data-anchor-id="naive-benchmark-models">Naive benchmark models</h2>
+<p><span class="source-note">Sources: <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span>, <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2018</a>)</span></span></p>
+<p>Before fitting complex models, you should establish a <strong>naive benchmark</strong>, which is a simple forecast that your complex models should beat. Common benchmarks include:</p>
+<ul>
+<li><strong>Naïve (Naïve1)</strong>: Carry the last observed vale forward.</li>
+<li><strong>Seasonal Naïve (SNaïve):</strong> Carry the last observation from the <em>same period</em> forward (e.g., use Last Monday’s value for this Monday).</li>
+<li><strong>Drift</strong>: Variation of the naïve method that allows the forecasts to increase or decrease over time, where the amount of change over time (the drift) is set to be the average change seen in the historical data.</li>
+<li><strong>Mean:</strong> Use overall historical mean.</li>
+</ul>
+<p>These benchmarks are also used as the reference for scaled error metrics (e.g., MASE).</p>
+</section>
+<section id="evaluating-forecast-accuracy-forecast-error" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-forecast-accuracy-forecast-error">Evaluating forecast accuracy: forecast error</h2>
+<p>We will evaluate the accuracy of forecasts from each model to decide which is best. This is done by measuring the difference between:</p>
+<ul>
+<li>The model’s predictions (ŷ) (also written as “Y hat” or <code>y_hat</code>).</li>
+<li>The actual observed values (y).</li>
+</ul>
+<section id="scale-dependent-errors" class="level3">
+<h3 class="anchored" data-anchor-id="scale-dependent-errors">Scale-dependent errors</h3>
+<p><span class="source-note">Sources: <span class="citation" data-cites="suleman_metrics">Suleman (<a href="#ref-suleman_metrics" role="doc-biblioref">2024</a>)</span>, <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2018</a>)</span></span></p>
+<p>These measures are scale-dependent, meaning that forecast errors are on the same scale as the data, and they cannot be used to make comparisons between series that involve different units.</p>
+<p><strong>Mean absolute error (MAE)</strong> - average of the absolute differences between the actual and predicted values.</p>
+<ul>
+<li>✅ Easy to understand and interpret.</li>
+<li>✅ Not sensitive to outliers.</li>
+<li>❌ Does not account for scale of the data.</li>
+</ul>
+<p><strong>Mean Squared Error (MSE)</strong> - average of <em>squared</em> differences between the actual and predicted values. It emphasises larger errors due to the squaring operation.</p>
+<ul>
+<li>✅ Penalises larger errors more than smaller errors, highlighting poor performance.</li>
+<li>❌ Sensitive to outliers.</li>
+<li>❌ Harder to interpret due to squaring.</li>
+</ul>
+<p><strong>Root mean squared error (RMSE)</strong> - square root of MSE. This means the error metric is on the same scale as the original data.</p>
+<ul>
+<li>✅ Same units as original data, so it’s interpretable.</li>
+<li>✅ Penalises larger errors more than smaller errors, highlighting poor performance.</li>
+<li>❌ Sensitive to outliers.</li>
+</ul>
+</section>
+<section id="percentagerelative-errors" class="level3">
+<h3 class="anchored" data-anchor-id="percentagerelative-errors">Percentage/relative errors</h3>
+<p><span class="source-note">Sources: <span class="citation" data-cites="suleman_metrics">Suleman (<a href="#ref-suleman_metrics" role="doc-biblioref">2024</a>)</span>, <span class="citation" data-cites="lewinson_mape">Wikipedia (<a href="#ref-lewinson_mape" role="doc-biblioref">2025</a>)</span>, <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2018</a>)</span></span></p>
+<p>These measures are scale-independent, making them useful for comparing across datasets.</p>
+<p><strong>Mean absolute percentage error (MAPE)</strong> - average of the absolute percentage errors between the actual and predicted values. Expresses the error as a percentage.</p>
+<ul>
+<li>✅ Scale-independent.</li>
+<li>✅ Easy to interpret as a percentage.</li>
+<li>❌ Can be biased if actual values are small.</li>
+<li>❌ Doesn’t work if actual values are zero.</li>
+<li>❌ Asymmetric, putting a heavier penalty on negative errors (when forecast is higher than actual) than on positive errors. This is because the percentage error can’t exceed 100% for forecasts that are too low, but there is no upper limit for forecasts that are too high.</li>
+</ul>
+<p><strong>Symmetric MAPE (sMAPE)</strong> - modified version of MAPE that attempts to deal with the asymmetry, through having lower (0%) and upper (200%) bounds.</p>
+<ul>
+<li>✅ Scale-independent.</li>
+<li>✅ Fixes the asymmetry shortcoming of MAPE.</li>
+<li>❌ Less interpretable than MAPE.</li>
+<li>❌ Unstable when true value and forecast are close to zero.</li>
+<li>❌ Can take negative values, and range of 0 to 100% is difficult to interpret.</li>
+</ul>
+<p>Hyndman &amp; Koehler (2006) recommend that the sMAPE not be used.</p>
+</section>
+<section id="scaled-errors" class="level3">
+<h3 class="anchored" data-anchor-id="scaled-errors">Scaled errors</h3>
+<p><span class="source-note">Sources: <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="lewinson_mape">Wikipedia (<a href="#ref-lewinson_mape" role="doc-biblioref">2025</a>)</span>, <span class="citation" data-cites="suleman_metrics">Suleman (<a href="#ref-suleman_metrics" role="doc-biblioref">2024</a>)</span></span></p>
+<p>Proposed by Hyndman &amp; Koehler (2006) as an alternative to percentage errors when comparing forecast accuracy across series with different units.</p>
+<p><strong>Mean absolute scaled error (MASE)</strong> - the MAE of the forecast values divided by the MAE of the in-sample one-step naive forecast (Naïve1).</p>
+<ul>
+<li>✅ Scale-independent.</li>
+<li>✅ Symmetric.</li>
+<li>❌ Requires in-sample data (i.e., data used for model fitting) to calculate the naive forecast error.</li>
+</ul>
+</section>
+</section>
+<section id="evaluating-forecast-accuracy-prediction-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-forecast-accuracy-prediction-intervals">Evaluating forecast accuracy: prediction intervals</h2>
+</section>
+<section id="evaluating-forecast-accuracy-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-forecast-accuracy-data-sets">Evaluating forecast accuracy: data sets</h2>
+</section>
+<section id="transformations" class="level2">
+<h2 class="anchored" data-anchor-id="transformations">Transformations</h2>
+<p><span class="source-note">Sources: <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020b</a>)</span></span></p>
+<p>Mathematical transformations are used to simplify the patterns in historical data to make forecasting simpler and more accurate. Any forecasts are produced on a transformed scale, so the data then has to be back-transformed.</p>
+<p>For example, if variation increases or decreases over time, a logarithmic transformation is often usedful. If log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale.</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
@@ -220,11 +336,20 @@ Howell, Egor. 2022. <em>Autocorrelation for Time Series Analysis</em>. <a href="
 <div id="ref-hsma_intro_to_forecasting" class="csl-entry" role="listitem">
 HSMA. 2024. <em>8B Forecasting: Part 1 - Intro to Forecasting</em>. <a href="https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%201%20-%20Intro%20to%20Forecasting.pdf">https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%201%20-%20Intro%20to%20Forecasting.pdf</a>.
 </div>
+<div id="ref-hyndman_toolbox" class="csl-entry" role="listitem">
+Hyndman, Rob., and George. Athanasopoulos. 2018. <span>“The Forecaster’s Toolbox.”</span> Chap. 2 in <em>Forecasting Principles and Practice</em>, 2nd ed. OTexts. <a href="https://otexts.com/fpp2/toolbox.html">https://otexts.com/fpp2/toolbox.html</a>.
+</div>
 <div id="ref-monks_intro_to_forecasting" class="csl-entry" role="listitem">
 Monks, Tom. 2020a. <em>An Introduction to Forecasting in Health</em>. <a href="https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/">https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/</a>.
 </div>
 <div id="ref-monks_arima" class="csl-entry" role="listitem">
 Monks, Tom. 2020b. <em>Modelling Health System Demand Using ARIMA</em>. <a href="https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w">https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w</a>.
+</div>
+<div id="ref-suleman_metrics" class="csl-entry" role="listitem">
+Suleman, Eshban. 2024. <em>Understanding Evaluation Metrics for Time Series Forecasting</em>. <a href="https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654">https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654</a>.
+</div>
+<div id="ref-lewinson_mape" class="csl-entry" role="listitem">
+Wikipedia. 2025. <em>Mean Absolute Scaled Error</em>. <a href="https://en.wikipedia.org/wiki/Mean_absolute_scaled_error">https://en.wikipedia.org/wiki/Mean_absolute_scaled_error</a>.
 </div>
 </div>
 
@@ -305,7 +430,7 @@ Monks, Tom. 2020b. <em>Modelling Health System Demand Using ARIMA</em>. <a href=
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amyheather\.github\.io\/forecasting\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
