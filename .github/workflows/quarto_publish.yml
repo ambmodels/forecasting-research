@@ -20,6 +20,7 @@ jobs:
       - name: Render and publish to GitHub pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
+          path: website
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
