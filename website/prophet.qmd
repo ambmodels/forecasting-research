@@ -7,6 +7,7 @@ format:
 ---
 
 ```{python}
+#| output: false
 import pandas as pd
 from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot
@@ -36,6 +37,8 @@ Prophet models a time series as a sum of components:
 * Seasonality
 * Holidays/special event effects
 * Error (unexplained noise)
+
+Additional regressors can also be incorporated.
 
 ## Trend
 
@@ -75,9 +78,11 @@ fig = m.plot(forecast)
 
 ### Trend changepoints
 
-<span class="source-note">Source: @prophet_changepoints, @monks_prophet</span>
+<span class="source-note">Source: @prophet_changepoints, @monks_prophet, @hsma_prophet</span>
 
 Both the linear and logistic growth trend models use **changepoints**. These are specific points in time where the trend is allowed to shift.
+
+A smooth trend with minimal variability implies that things will be similar in the future. It reduces uncertainty. Meanwhile, something with a lot of change points will have a wider prediction interval.
 
 #### How are changepoints chosen?
 
@@ -113,7 +118,7 @@ a = add_changepoints_to_plot(fig.gca(), m, forecast)
 You can adjust how flexible the trend is via `changepoint_prior_scale` (default 0.05):
 
 * A higher value allows more changepoints to be accepted, giving a more flexible trend and increasing the risk of overfitting to noise.
-* A lower value results in fewer changepoints and a smoother trend, but risks missing real shifts in the unverlying trend.
+* A lower value results in fewer changepoints and a smoother trend, but risks missing real shifts in the underlying trend.
 
 You can also manually specify known changepoint dates if you already know when significant shifts occurred, rather than relying on automatic detection.
 
@@ -121,11 +126,120 @@ Fitting to only the first 80% of the data helps avoid overfitting to recent fluc
 
 ## Seasonality
 
+<span class="source-note">Source: @prophet_seasonality</span>
+
+Prophet models seasonal patterns using **Fourier series**. These are mathematical representations built by adding together sine and cosine waves (S-shaped curves with different starting points) of different frequencies. By adding many of these waves together at different speeds and sizes, you can approximate almost any repeating pattern.
+
+![Combination of sine and cosine. Image from @monks_prophet CC-BY.](/images/sine_cosine.png)
+
+It can include seasonality at different intervals - by default:
+
+* **Yearly seasonality** - repeating pattern across a calendar year (e.g., higher demand in summer, lower in winter).
+* **Weekly seasonality** - repeating pattern within a single week (e.g., peaks on Monday and Friday).
+* **Daily seasonality** - repeating pattern within a single day (e.g., peaks at 8am and 6pm).
+
+You can also use `add_seasonality` to add other periods like monthly, quarterly and hourly seasonality.
+
+Prophet checks whether you have enough data before including each default seasonality. For example, yearly and weekly seasonality required at least two cycles (i.e., 2 years and/or 2 weeks). Daily seasonality is only included if your timestamps are sub-daily.
+
+### Example of forecast with weekly and yearly seasonality
+
+<span class="source-note">Source: @prophet_seasonality</span>
+
+```{python}
+#| output: false
+df = pd.read_csv(
+  "https://raw.githubusercontent.com/facebook/prophet/" +
+  "main/examples/example_wp_log_peyton_manning.csv"
+)
+m = Prophet().fit(df)
+future = m.make_future_dataframe(periods=365)
+forecast = m.predict(future)
+```
+
+```{python}
+fig = m.plot_components(forecast)
+```
+
+### Conditional seasonality
+
+<span class="source-note">Source: @prophet_seasonality</span>
+
+Seasonality may depend on other factors - for example, if the pattern of weekly seasonnality is different in the summer versus the winter. This can be modelled using conditional seasonalities.
+
+1. Add a boolean column to your dataframe marking which season each date falls into.
+2. Disable the default weekly seasonality.
+3. Add custom seasonality terms for each season using `add_seasonality()`, only applying it to relevant dates marked by the boolean column.
+
+### Multiplicative seasonality
+
+<span class="source-note">Source: @prophet_multiplicative</span>
+
+By default, Prophet fits additive seasonality. This means the seasonal effect is added to the trend to get the forecast, so the size of the seasonal effect is constant.
+
+If seasonality is not a constant additive factor, but instead growts with trend, this is **multiplicative seasonality**.
+
+In the example below, there is a clear yearly cycle, but with additive seasonality, the model forecast (blue) fits poorly against the actual values (black). The seasonal effect is too large near the start of the series and too small by the end.
+
+```{python}
+#| output: false
+df = pd.read_csv(
+  "https://raw.githubusercontent.com/facebook/prophet/" +
+  "main/examples/example_air_passengers.csv"
+)
+m = Prophet()
+m.fit(df)
+future = m.make_future_dataframe(50, freq="MS")
+forecast = m.predict(future)
+```
+
+```{python}
+fig = m.plot(forecast)
+```
+
+This can be corrected by setting `seasonality_mode="multiplicative"`, which multiplies the trend by the seasonal component instead of adding it.
+
+```{python}
+#| output: false
+m = Prophet(seasonality_mode="multiplicative")
+m.fit(df)
+future = m.make_future_dataframe(50, freq="MS")
+forecast = m.predict(future)
+```
+
+```{python}
+fig = m.plot(forecast)
+```
+
 ## Holidays
+
+<span class="source-note">Source: @prophet_seasonality</span>
+
+Prophet has built-in support for public holidays and can accept any custom event dates. Each holiday is modelled as a dummy variable (1 on the holiday date, 0 otherwise), with an associated coefficient estimating its effect on the trend. You can use `lower_window` and `upper_window` parameters to extend the holiday effect to the days around the date.
 
 ## Error
 
-Independent identically distribution (i.i.d.) errors
+The error term captures whatever variation in the data is left over once the trend, seasonality, and holiday components have all been accounted for. It is essentially the noise the model can't explain.
+
+Prophet assumes errors are independent and identically distributed (i.i.d.): the leftover noise should look the same at every point in time, with no pattern linking one error to the next. If residuals grow over time or cluster around certain dates, that violates i.i.d. and signals unaccounted structure rather than pure noise.
+
+## Additional regressors
+
+<span class="source-note">Source: @prophet_seasonality</span>
+
+External variables can be included as additional regressors - for example, weather data, or the performance of a related service.
+
+You will need to have future values of that variable available for the forecasting period too, which usually means forecasting it first.
+
+## Prediction intervals
+
+<span class="source-note">Source: @prophet_monks</span>
+
+Prophet prediction intervals are nearly always "too" narrow. Potential (complex) solutions:
+
+* Combination/Ensemble forecasts - average of Prophet and another method (e.g., ARIMA).
+* Use ARIMA to forecast Prophet residuals (errors) then adjust the Prophet forecast accordingly.
+* Bagging (bootstrap aggregating) - create bootstrap time series, fit and predict from multiple models to capture uncertainty.
 
 ## References
 
