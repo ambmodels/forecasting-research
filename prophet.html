@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -209,7 +244,16 @@ background-size: cover;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#prophet-model-structure" id="toc-prophet-model-structure" class="nav-link active" data-scroll-target="#prophet-model-structure">Prophet model structure</a></li>
+  <li><a href="#trend" id="toc-trend" class="nav-link" data-scroll-target="#trend">Trend</a>
+  <ul class="collapse">
+  <li><a href="#trend-model" id="toc-trend-model" class="nav-link" data-scroll-target="#trend-model">Trend model</a></li>
+  <li><a href="#trend-changepoints" id="toc-trend-changepoints" class="nav-link" data-scroll-target="#trend-changepoints">Trend changepoints</a></li>
+  </ul></li>
+  <li><a href="#seasonality" id="toc-seasonality" class="nav-link" data-scroll-target="#seasonality">Seasonality</a></li>
+  <li><a href="#holidays" id="toc-holidays" class="nav-link" data-scroll-target="#holidays">Holidays</a></li>
+  <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error">Error</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -220,10 +264,152 @@ background-size: cover;
 
 
 
+<div id="0b7309b7" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet <span class="im">import</span> Prophet</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> add_changepoints_to_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Importing plotly failed. Interactive plots will not work.</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><span class="source-note">Source: <span class="citation" data-cites="prophet_home">Meta (<a href="#ref-prophet_home" role="doc-biblioref">2026a</a>)</span></span></p>
+<p>Prophet is an easy-to-use open-source forecasting library available in Python and R, developed by Meta (Facebook).</p>
+<p>It is designed to handle time series with strong seasonality and holiday effects.</p>
+<section id="prophet-model-structure" class="level2">
+<h2 class="anchored" data-anchor-id="prophet-model-structure">Prophet model structure</h2>
+<p><span class="source-note">Source: <span class="citation" data-cites="hsma_prophet">HSMA (<a href="#ref-hsma_prophet" role="doc-biblioref">2024</a>)</span>, <span class="citation" data-cites="monks_prophet">Monks (<a href="#ref-monks_prophet" role="doc-biblioref">2020</a>)</span></span></p>
+<p>Prophet models a time series as a sum of components:</p>
+<ul>
+<li>Trend</li>
+<li>Seasonality</li>
+<li>Holidays/special event effects</li>
+<li>Error (unexplained noise)</li>
+</ul>
+</section>
+<section id="trend" class="level2">
+<h2 class="anchored" data-anchor-id="trend">Trend</h2>
+<div class="h3-tight">
+
+</div>
+<section id="trend-model" class="level3">
+<h3 class="anchored" data-anchor-id="trend-model">Trend model</h3>
+<p><span class="source-note">Source: <span class="citation" data-cites="prophet_saturating">Meta (<a href="#ref-prophet_saturating" role="doc-biblioref">2026c</a>)</span></span></p>
+<p>Prophet supports two models for trend:</p>
+<p><strong>Piecewise linear regression trend model</strong>. Linear regression draws a straight line through a dataset. Piecewise linear regression will break the data into intervals and fits a line to each, each with their own slope. This makes it well suited to datasets where the underlying trend isn’t a single straight line but shifts direction over time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/piecewise_linear_regression.png" class="img-fluid figure-img"></p>
+<figcaption>Piecewise linear regression. Image from <span class="citation" data-cites="epfl_piecewise">EPFL (<a href="#ref-epfl_piecewise" role="doc-biblioref">2021</a>)</span></figcaption>
+</figure>
+</div>
+<p><strong>Logistic growth trend model</strong>. This is used when there is a maximum value that can’t be crossed (known as the “carrying capacity”). This model will start to flatten the trend as it approaches that value.</p>
+<p><span class="source-note">Code source: <span class="citation" data-cites="prophet_saturating">Meta (<a href="#ref-prophet_saturating" role="doc-biblioref">2026c</a>)</span></span></p>
+<div id="254992ff" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/facebook/prophet/"</span> <span class="op">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"main/examples/example_wp_log_R.csv"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"cap"</span>] <span class="op">=</span> <span class="fl">8.5</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> Prophet(growth<span class="op">=</span><span class="st">"logistic"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>m.fit(df)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> m.make_future_dataframe(periods<span class="op">=</span><span class="dv">1826</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>future[<span class="st">"cap"</span>] <span class="op">=</span> <span class="fl">8.5</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> m.predict(future)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="88240b6f" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> m.plot(forecast)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prophet_files/figure-html/cell-5-output-1.png" width="951" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="trend-changepoints" class="level3">
+<h3 class="anchored" data-anchor-id="trend-changepoints">Trend changepoints</h3>
+<p><span class="source-note">Source: <span class="citation" data-cites="prophet_changepoints">Meta (<a href="#ref-prophet_changepoints" role="doc-biblioref">2026d</a>)</span>, <span class="citation" data-cites="monks_prophet">Monks (<a href="#ref-monks_prophet" role="doc-biblioref">2020</a>)</span></span></p>
+<p>Both the linear and logistic growth trend models use <strong>changepoints</strong>. These are specific points in time where the trend is allowed to shift.</p>
+<section id="how-are-changepoints-chosen" class="level4">
+<h4 class="anchored" data-anchor-id="how-are-changepoints-chosen">How are changepoints chosen?</h4>
+<p>Prophet detects these automatically by testing many possible points, and keeping only those where a change is observed. In more detail:</p>
+<ol type="1">
+<li>It places a many potential changepoints across the first 80% of the data. The count is set by <code>n_changepoints</code>, but it’s usually best to leave this at default and control flexibility via the regularisation parameter below instead.</li>
+<li>It fits the model using a “sparse Laplace prior” on the size of each changepoint’s rate change. This prior assumes most changepoints have no real effect, shrinking their estimated impact toward zero unless the data strongly supports a shift.</li>
+<li>What remains are the changepoints with a meaningfully large rate of change.</li>
+</ol>
+<p>This is a Bayesian approach: rather than deciding in advance how many changepoints are real, Prophet starts with a prior belief (most changepoints don’t matter) and updates it using the data. The Laplace prior is closely related to L1 regularisation (as in Lasso regression). Both shrink small, uncertain effects toward zero while leaving large, well-supported effects largely intact. In practice, most potential changepoints end up negligible, and only a handful with strong evidence shape the trend, preventing it from reacting to minor fluctuations.</p>
+<p><span class="source-note">Code source: <span class="citation" data-cites="prophet_start">Meta (<a href="#ref-prophet_start" role="doc-biblioref">2026b</a>)</span>, <span class="citation" data-cites="prophet_changepoints">Meta (<a href="#ref-prophet_changepoints" role="doc-biblioref">2026d</a>)</span></span></p>
+<div id="f9c40156" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/facebook/prophet/"</span> <span class="op">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"main/examples/example_wp_log_peyton_manning.csv"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> Prophet()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>m.fit(df)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> m.make_future_dataframe(periods<span class="op">=</span><span class="dv">365</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> m.predict(future)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="b5ef00f9" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> m.plot(forecast)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> add_changepoints_to_plot(fig.gca(), m, forecast)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prophet_files/figure-html/cell-7-output-1.png" width="951" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adjusting-the-trend" class="level4">
+<h4 class="anchored" data-anchor-id="adjusting-the-trend">Adjusting the trend</h4>
+<p>You can adjust how flexible the trend is via <code>changepoint_prior_scale</code> (default 0.05):</p>
+<ul>
+<li>A higher value allows more changepoints to be accepted, giving a more flexible trend and increasing the risk of overfitting to noise.</li>
+<li>A lower value results in fewer changepoints and a smoother trend, but risks missing real shifts in the unverlying trend.</li>
+</ul>
+<p>You can also manually specify known changepoint dates if you already know when significant shifts occurred, rather than relying on automatic detection.</p>
+<p>Fitting to only the first 80% of the data helps avoid overfitting to recent fluctuations that may not reflect a genuine long-term shift. However, in some settings, you may wish to adjust this too using <code>changepoint_range</code>.</p>
+</section>
+</section>
+</section>
+<section id="seasonality" class="level2">
+<h2 class="anchored" data-anchor-id="seasonality">Seasonality</h2>
+</section>
+<section id="holidays" class="level2">
+<h2 class="anchored" data-anchor-id="holidays">Holidays</h2>
+</section>
+<section id="error" class="level2">
+<h2 class="anchored" data-anchor-id="error">Error</h2>
+<p>Independent identically distribution (i.i.d.) errors</p>
+</section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-epfl_piecewise" class="csl-entry" role="listitem">
+EPFL. 2021. <em>Statistical Analysis of Sparse and Piecewise-Linear Regression</em>. <a href="https://www.epfl.ch/labs/lcav/statistical-analysis-of-sparse-and-piecewise-linear-regression/">https://www.epfl.ch/labs/lcav/statistical-analysis-of-sparse-and-piecewise-linear-regression/</a>.
+</div>
+<div id="ref-hsma_prophet" class="csl-entry" role="listitem">
+HSMA. 2024. <em>8B Forecasting: Part 2 - Forecsting with Prophet</em>. <a href="https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%202%20-%20Forecasting%20with%20Prophet.pdf">https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%202%20-%20Forecasting%20with%20Prophet.pdf</a>.
+</div>
+<div id="ref-prophet_home" class="csl-entry" role="listitem">
+Meta. 2026a. <em>Prophet: Forecasting at Scale</em>. <a href="https://facebook.github.io/prophet/">https://facebook.github.io/prophet/</a>.
+</div>
+<div id="ref-prophet_start" class="csl-entry" role="listitem">
+Meta. 2026b. <em>Quick Start</em>. <a href="https://facebook.github.io/prophet/docs/quick_start.html">https://facebook.github.io/prophet/docs/quick_start.html</a>.
+</div>
+<div id="ref-prophet_saturating" class="csl-entry" role="listitem">
+Meta. 2026c. <em>Saturating Forecasts</em>. <a href="https://facebook.github.io/prophet/docs/saturating_forecasts.html">https://facebook.github.io/prophet/docs/saturating_forecasts.html</a>.
+</div>
+<div id="ref-prophet_changepoints" class="csl-entry" role="listitem">
+Meta. 2026d. <em>Trend Changepoints</em>. <a href="https://facebook.github.io/prophet/docs/trend_changepoints.html">https://facebook.github.io/prophet/docs/trend_changepoints.html</a>.
+</div>
+<div id="ref-monks_prophet" class="csl-entry" role="listitem">
+Monks, Tom. 2020. <em>Facebook’s Prophet</em>. <a href="https://docs.google.com/presentation/d/1MqzgirZyMctmGKaudnoufHZvp06bGS8qbIKI2g-zEz0">https://docs.google.com/presentation/d/1MqzgirZyMctmGKaudnoufHZvp06bGS8qbIKI2g-zEz0</a>.
+</div>
 </div>
 
 

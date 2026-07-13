@@ -132,6 +132,83 @@
     ]
   },
   {
+    "objectID": "prophet.html",
+    "href": "prophet.html",
+    "title": "Prophet",
+    "section": "",
+    "text": "import pandas as pd\nfrom prophet import Prophet\nfrom prophet.plot import add_changepoints_to_plot\n\nImporting plotly failed. Interactive plots will not work.\nSource: Meta (2026a)\nProphet is an easy-to-use open-source forecasting library available in Python and R, developed by Meta (Facebook).\nIt is designed to handle time series with strong seasonality and holiday effects.",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#prophet-model-structure",
+    "href": "prophet.html#prophet-model-structure",
+    "title": "Prophet",
+    "section": "Prophet model structure",
+    "text": "Prophet model structure\nSource: HSMA (2024), Monks (2020)\nProphet models a time series as a sum of components:\n\nTrend\nSeasonality\nHolidays/special event effects\nError (unexplained noise)",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#trend",
+    "href": "prophet.html#trend",
+    "title": "Prophet",
+    "section": "Trend",
+    "text": "Trend\n\n\n\n\nTrend model\nSource: Meta (2026c)\nProphet supports two models for trend:\nPiecewise linear regression trend model. Linear regression draws a straight line through a dataset. Piecewise linear regression will break the data into intervals and fits a line to each, each with their own slope. This makes it well suited to datasets where the underlying trend isn’t a single straight line but shifts direction over time.\n\n\n\nPiecewise linear regression. Image from EPFL (2021)\n\n\nLogistic growth trend model. This is used when there is a maximum value that can’t be crossed (known as the “carrying capacity”). This model will start to flatten the trend as it approaches that value.\nCode source: Meta (2026c)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_R.csv\"\n)\ndf[\"cap\"] = 8.5\nm = Prophet(growth=\"logistic\")\nm.fit(df)\nfuture = m.make_future_dataframe(periods=1826)\nfuture[\"cap\"] = 8.5\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\n\n\n\n\n\n\n\n\n\n\nTrend changepoints\nSource: Meta (2026d), Monks (2020)\nBoth the linear and logistic growth trend models use changepoints. These are specific points in time where the trend is allowed to shift.\n\nHow are changepoints chosen?\nProphet detects these automatically by testing many possible points, and keeping only those where a change is observed. In more detail:\n\nIt places a many potential changepoints across the first 80% of the data. The count is set by n_changepoints, but it’s usually best to leave this at default and control flexibility via the regularisation parameter below instead.\nIt fits the model using a “sparse Laplace prior” on the size of each changepoint’s rate change. This prior assumes most changepoints have no real effect, shrinking their estimated impact toward zero unless the data strongly supports a shift.\nWhat remains are the changepoints with a meaningfully large rate of change.\n\nThis is a Bayesian approach: rather than deciding in advance how many changepoints are real, Prophet starts with a prior belief (most changepoints don’t matter) and updates it using the data. The Laplace prior is closely related to L1 regularisation (as in Lasso regression). Both shrink small, uncertain effects toward zero while leaving large, well-supported effects largely intact. In practice, most potential changepoints end up negligible, and only a handful with strong evidence shape the trend, preventing it from reacting to minor fluctuations.\nCode source: Meta (2026b), Meta (2026d)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_peyton_manning.csv\"\n)\nm = Prophet()\nm.fit(df)\nfuture = m.make_future_dataframe(periods=365)\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\na = add_changepoints_to_plot(fig.gca(), m, forecast)\n\n\n\n\n\n\n\n\n\n\nAdjusting the trend\nYou can adjust how flexible the trend is via changepoint_prior_scale (default 0.05):\n\nA higher value allows more changepoints to be accepted, giving a more flexible trend and increasing the risk of overfitting to noise.\nA lower value results in fewer changepoints and a smoother trend, but risks missing real shifts in the unverlying trend.\n\nYou can also manually specify known changepoint dates if you already know when significant shifts occurred, rather than relying on automatic detection.\nFitting to only the first 80% of the data helps avoid overfitting to recent fluctuations that may not reflect a genuine long-term shift. However, in some settings, you may wish to adjust this too using changepoint_range.",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#seasonality",
+    "href": "prophet.html#seasonality",
+    "title": "Prophet",
+    "section": "Seasonality",
+    "text": "Seasonality",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#holidays",
+    "href": "prophet.html#holidays",
+    "title": "Prophet",
+    "section": "Holidays",
+    "text": "Holidays",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#error",
+    "href": "prophet.html#error",
+    "title": "Prophet",
+    "section": "Error",
+    "text": "Error\nIndependent identically distribution (i.i.d.) errors",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#references",
+    "href": "prophet.html#references",
+    "title": "Prophet",
+    "section": "References",
+    "text": "References\n\n\nEPFL. 2021. Statistical Analysis of Sparse and Piecewise-Linear Regression. https://www.epfl.ch/labs/lcav/statistical-analysis-of-sparse-and-piecewise-linear-regression/.\n\n\nHSMA. 2024. 8B Forecasting: Part 2 - Forecsting with Prophet. https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%202%20-%20Forecasting%20with%20Prophet.pdf.\n\n\nMeta. 2026a. Prophet: Forecasting at Scale. https://facebook.github.io/prophet/.\n\n\nMeta. 2026b. Quick Start. https://facebook.github.io/prophet/docs/quick_start.html.\n\n\nMeta. 2026c. Saturating Forecasts. https://facebook.github.io/prophet/docs/saturating_forecasts.html.\n\n\nMeta. 2026d. Trend Changepoints. https://facebook.github.io/prophet/docs/trend_changepoints.html.\n\n\nMonks, Tom. 2020. Facebook’s Prophet. https://docs.google.com/presentation/d/1MqzgirZyMctmGKaudnoufHZvp06bGS8qbIKI2g-zEz0.",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
     "objectID": "naive.html",
     "href": "naive.html",
     "title": "Naive benchmark models",
