@@ -11,9 +11,12 @@ website:
   sidebar:
     style: docked
     contents:
-      - text: Welcome
-        href: index.qmd
-      - essentials.qmd
+      - introduction.qmd
+      - naive.qmd
+      - evaluation.qmd
+      - transformation.qmd
+      - prophet.qmd
+      - arima.qmd
 
 format:
   html:

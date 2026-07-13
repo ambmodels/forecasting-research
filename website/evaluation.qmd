@@ -1,85 +1,9 @@
 ---
-title: Forecasting essentials
+title: Evaluating forecast accuracy
 bibliography: references.bib
 ---
 
-Forecasting is the process of using historical data to make predictions about future values. It applies statistical models to historical patterns, and projects those patterns forwards in time.
-
-## The forecasting process
-
-### Steps of a forecasting project
-
-<span class="source-note">Source: @monks_intro_to_forecasting</span>
-
-1. **Define the problem** (what we are forecasting and how it will be used).
-2. **Collect time series data**
-3. **Explore and visulise the data**
-4. **Fit a range of candidate models**
-5. **Evaluate and choose the best models** (using error metrics).
-6. **Generate the forecast** (using the best model).
-
-### Questions to ask when defining the problem
-
-<span class="source-note">Sources: @monks_intro_to_forecasting, @hsma_intro_to_forecasting</span>
-
-* **What decisions will forecasting support?** (e.g., short term operational? long term? future resource requirements?).
-* **Do you need to forecast one quantity or many** (i.e., total demand, v.s., demand broken down by age group or region).
-* **How accurate does forecast need to be to support decisions?**
-* **How far ahead do you need to forecast?**
-* **What is the frequency of your data, and how often do you need new forecasts** (i.e., cannot produce daily forecasts from monthly data).
-
-## Time series data
-
-<span class="source-note">Source: @monks_intro_to_forecasting</span>
-
-A times series is a sequence of observations recorded at regular intervals over time. Features of a time series:
-
-* **Trend** - the long-term underlying direction of values, independent of short-term fluctuations.
-* **Seasonality** - a repeating pattern at fixed times - e.g., high demand on weekends.
-* **Mean** - average level of the series.
-* **Variance** - how spread out the vales are around the mean.
-
-There are also two more complicated properties explained below:
-
-* **Stationarity**
-* **Autocorrelation**
-
-### Stationarity
-
-<span class="source-note">Source: @monks_arima</span>
-
-A stationary time series has:
-
-* No trend.
-* No seasonality.
-* Stable variance.
-
-This is uncommon for healthcare datasets.
-
-### Autocorrelation
-
-<span class="source-note">Source: @tds_autocorrelation</span>
-
-Autocorrelation is the correlation of data with itself, at two different points in time (known as lags) - so we are measuring how a data point relates to its own past self at different lags.
-
-For example, if a busy Sunday is often be followed by a busy Monday.
-
-It can also be used to help detect seasonality.
-
-## Naive benchmark models
-
-<span class="source-note">Sources: @monks_intro_to_forecasting, @hyndman_toolbox</span>
-
-Before fitting complex models, you should establish a **naive benchmark**, which is a simple forecast that your complex models should beat. Common benchmarks include:
-
-* **Naïve (Naïve1)**: Carry the last observed vale forward.
-* **Seasonal Naïve (SNaïve):** Carry the last observation from the *same period* forward (e.g., use Last Monday's value for this Monday).
-* **Drift**: Variation of the naïve method that allows the forecasts to increase or decrease over time, where the amount of change over time (the drift) is set to be the average change seen in the historical data.
-* **Mean:** Use overall historical mean.
-
-These benchmarks are also used as the reference for scaled error metrics (e.g., MASE).
-
-## Evaluating forecast accuracy: point forecast error
+## Point forecast error
 
 We will evaluate the accuracy of forecasts from each model to decide which is best. This is done by measuring the difference between:
 
@@ -148,7 +72,7 @@ Proposed by Hyndman & Koehler (2006) as an alternative to percentage errors when
 * ✅ Symmetric.
 * ❌ Requires in-sample data (i.e., data used for model fitting) to calculate the naive forecast error.
 
-## Evaluating forecast accuracy: prediction intervals
+## Prediction intervals
 
 <span class="source-note">Sources: @monks_intro_to_forecasting, @monks_winkler, @monks_prediction, @hyndman_toolbox</span>
 
@@ -186,7 +110,7 @@ The average Winkler score divided by the one-step in-sample Naïve1 or SNaïve.
 * ❌ Requires in-sample data to compute the naive benchmark.
 * ❌ If in-sample naive error is very small or close to zero, the scaled score can be unstable or misleadingly large.
 
-## Evaluating forecast accuracy: data sets
+## Data sets
 
 ### Train-test split
 
@@ -228,14 +152,6 @@ Instead of one split, you create many overlapping sets of train/test or train/va
 A variant where instead of expanding the training window, you slide a fixed-size window forward, so older data is dropped from training as new data is added. Useful when you believe very old data is less relevant.
 
 ![Cross-validation with sliding window. Image from @monks_intro_to_forecasting (CC-BY).](/images/sliding_window.png)
-
-## Transformations
-
-<span class="source-note">Sources: @hyndman_toolbox, @monks_arima</span>
-
-Mathematical transformations are used to simplify the patterns in historical data to make forecasting simpler and more accurate. Any forecasts are produced on a transformed scale, so the data then has to be back-transformed.
-
-For example, if variation increases or decreases over time, a logarithmic transformation is often usedful. If log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale.
 
 ## References
 

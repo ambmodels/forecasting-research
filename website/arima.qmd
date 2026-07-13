@@ -1,0 +1,9 @@
+---
+title: ARIMA
+bibliography: references.bib
+---
+
+## References
+
+::: {#refs}
+:::

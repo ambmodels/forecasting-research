@@ -1,0 +1,20 @@
+---
+title: Naive benchmark models
+bibliography: references.bib
+---
+
+<span class="source-note">Sources: @monks_intro_to_forecasting, @hyndman_toolbox</span>
+
+Before fitting complex models, you should establish a **naive benchmark**, which is a simple forecast that your complex models should beat. Common benchmarks include:
+
+* **Naïve (Naïve1)**: Carry the last observed vale forward.
+* **Seasonal Naïve (SNaïve):** Carry the last observation from the *same period* forward (e.g., use Last Monday's value for this Monday).
+* **Drift**: Variation of the naïve method that allows the forecasts to increase or decrease over time, where the amount of change over time (the drift) is set to be the average change seen in the historical data.
+* **Mean:** Use overall historical mean.
+
+These benchmarks are also used as the reference for scaled error metrics (e.g., MASE).
+
+## References
+
+::: {#refs}
+:::

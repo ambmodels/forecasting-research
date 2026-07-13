@@ -1,0 +1,9 @@
+---
+title: Prophet
+bibliography: references.bib
+---
+
+## References
+
+::: {#refs}
+:::
