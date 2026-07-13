@@ -14,9 +14,9 @@ website:
       - introduction.qmd
       - naive.qmd
       - evaluation.qmd
-      - transformation.qmd
       - prophet.qmd
       - arima.qmd
+      - other_methods.qmd
 
 format:
   html:
@@ -24,3 +24,4 @@ format:
     css: style/style.css
     toc: true
     title-block-banner: images/banner.png
+    lightbox: true

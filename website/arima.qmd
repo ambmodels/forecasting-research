@@ -6,6 +6,50 @@ format:
     css: /style/page_style.css
 ---
 
+## Autocorrelation
+
+<span class="source-note">Source: @apx_acf, @seyed_acf</span>
+
+Autocorrelation is the correlation between observations within a time series, measured using the **autocorrelation function (ACF)**. It calculates how correlated a series is with lagged versions of itself, comparing each value to the one one step before, then two steps before, three steps before, and so on.
+
+For each lag, the ACF produces a single correlation coefficient between +1 and -1. On an ACF plot:
+
+* **X-axis** is the lag (1, 2, 3...).
+* **Y-axis** is the correlation coefficient for that lag.
+
+A spike above the significance boundary indicates a meaningful correlation. For example, for daily data, a spike at lag 7 indicates weekly seasonality. For monthly data, a spike at lag 12 would indicate yearly seasonality.
+
+![Autocorrelation function for monthly data, showing yearly seasonality (spike at lag 12 + 24 + 36 + 48). Image source: @monks_arima](/images/acf.png)
+
+## Stationarity
+
+<span class="source-note">Source: @monks_arima, @hyndman_toolbox</span>
+
+A stationary time series has no predictable long-term pattern. It has:
+
+* No trend.
+* No seasonality.
+* Stable variance (the spread of values doesn't grow or shrink over time).
+
+We can pre-process a time series to achieve stationarity. Common techniques include:
+
+* **Differencing:** Taking the first difference means subtracting each observation from the one before it. This removes a trend by focusing on the change between consecutive points rather than their absolute level.
+
+* **Seasonal differencing:** If the series looks seasonal, subtract observations a full seasonal period apart (e.g., subtracting the value from 12 months earlier removes a yearly pattern in monthly data).
+
+* **Transformations:** Mathematical transformations are used to simplify the patterns in historical data to make forecasting simpler and more accurate. Any forecasts are produced on a transformed scale, so the data then has to be back-transformed.
+    * If variances increases or decreases over time, a **logarithmic transformation** is often useful, since it stablising variance by compressing large values more than small ones.
+
+Example:
+
+![Raw data. Image from @monks_arima.](/images/stationary_raw.png)
+
+![Log base 10 transformation. Image from @monks_arima.](/images/stationary_log.png)
+
+![First difference and seasonal difference. Image from @monks_arima.](/images/stationary_difference.png)
+
+Now it is stationary!
+
 ## References
 
 ::: {#refs}
