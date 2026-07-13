@@ -1,0 +1,21 @@
+---
+title: Forecasting in Python
+bibliography: references.bib
+author:
+  - name: Amy Heather
+    orcid: 0000-0002-6596-3479
+---
+ 
+A beginner-friendly introduction to time-series forecasting.
+
+These are my own notes, written to consolidate my understanding as I learned this topic. They draw heavily on a handful of excellent existing resources. The key sources I used are:
+
+- @monks_intro_to_forecasting — a general introduction to forecasting concepts and workflow.
+- @monks_arima — a focused walkthrough of ARIMA modelling.
+- @hyndman_toolbox — the standard toolbox reference for forecasting methods and best practice.
+- @suleman_metrics — a guide to forecast evaluation metrics.
+
+### References
+
+::: {#refs}
+:::

@@ -1,0 +1,22 @@
+project:
+  type: website
+
+website:
+  title: "Forecasting in Python"
+  navbar:
+    right:
+      - icon: github
+        text: GitHub
+        href: https://github.com/amyheather/forecasting
+  sidebar:
+    style: docked
+    contents:
+      - text: Welcome
+        href: index.qmd
+      - essentials.qmd
+
+format:
+  html:
+    theme: [simplex, style/theme.scss]
+    css: style/style.css
+    toc: true

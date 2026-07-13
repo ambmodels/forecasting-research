@@ -1,5 +1,5 @@
 ---
-title: Forecasting
+title: Forecasting essentials
 bibliography: references.bib
 ---
 
@@ -219,7 +219,7 @@ Instead of one split, you create many overlapping sets of train/test or train/va
 
 * ✅ Many error estimates, not just one, giving a more reliable picture of model performance.
 
-![Cross-validation with rolling forecast origin. Image from @monks_intro_to_forecasting (CC-BY).](images/rolling_forecast_origin.png)
+![Cross-validation with rolling forecast origin. Image from @monks_intro_to_forecasting (CC-BY).](/images/rolling_forecast_origin.png)
 
 ### Cross-validation with sliding window (fixed train size)
 
@@ -227,7 +227,7 @@ Instead of one split, you create many overlapping sets of train/test or train/va
 
 A variant where instead of expanding the training window, you slide a fixed-size window forward, so older data is dropped from training as new data is added. Useful when you believe very old data is less relevant.
 
-![Cross-validation with sliding window. Image from @monks_intro_to_forecasting (CC-BY).](images/sliding_window.png)
+![Cross-validation with sliding window. Image from @monks_intro_to_forecasting (CC-BY).](/images/sliding_window.png)
 
 ## Transformations
 
