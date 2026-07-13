@@ -1,24 +1,13 @@
 [
   {
-    "objectID": "transformation.html",
-    "href": "transformation.html",
-    "title": "Transformation",
+    "objectID": "other_methods.html",
+    "href": "other_methods.html",
+    "title": "Other methods",
     "section": "",
-    "text": "Sources: Hyndman and Athanasopoulos (2021), Monks (2020)\nMathematical transformations are used to simplify the patterns in historical data to make forecasting simpler and more accurate. Any forecasts are produced on a transformed scale, so the data then has to be back-transformed.\nFor example, if variation increases or decreases over time, a logarithmic transformation is often usedful. If log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale.",
+    "text": "combination/ensemble forecasts",
     "crumbs": [
       "GitHub",
-      "Transformation"
-    ]
-  },
-  {
-    "objectID": "transformation.html#references",
-    "href": "transformation.html#references",
-    "title": "Transformation",
-    "section": "References",
-    "text": "References\n\n\nHyndman, Rob., and George. Athanasopoulos. 2021. “The Forecaster’s Toolbox.” Chap. 5 in Forecasting Principles and Practice, 3rd ed. OTexts. https://otexts.com/fpp3/toolbox.html.\n\n\nMonks, Tom. 2020. Modelling Health System Demand Using ARIMA. https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w.",
-    "crumbs": [
-      "GitHub",
-      "Transformation"
+      "Other methods"
     ]
   },
   {
@@ -132,11 +121,55 @@
     ]
   },
   {
+    "objectID": "arima.html",
+    "href": "arima.html",
+    "title": "ARIMA",
+    "section": "",
+    "text": "Source: Learning (2026), Aghili (2023)\nAutocorrelation is the correlation between observations within a time series, measured using the autocorrelation function (ACF). It calculates how correlated a series is with lagged versions of itself, comparing each value to the one one step before, then two steps before, three steps before, and so on.\nFor each lag, the ACF produces a single correlation coefficient between +1 and -1. On an ACF plot:\n\nX-axis is the lag (1, 2, 3…).\nY-axis is the correlation coefficient for that lag.\n\nA spike above the significance boundary indicates a meaningful correlation. For example, for daily data, a spike at lag 7 indicates weekly seasonality. For monthly data, a spike at lag 12 would indicate yearly seasonality.\n\n\n\nAutocorrelation function for monthly data, showing yearly seasonality (spike at lag 12 + 24 + 36 + 48). Image source: Monks (2020)",
+    "crumbs": [
+      "GitHub",
+      "ARIMA"
+    ]
+  },
+  {
+    "objectID": "arima.html#autocorrelation",
+    "href": "arima.html#autocorrelation",
+    "title": "ARIMA",
+    "section": "",
+    "text": "Source: Learning (2026), Aghili (2023)\nAutocorrelation is the correlation between observations within a time series, measured using the autocorrelation function (ACF). It calculates how correlated a series is with lagged versions of itself, comparing each value to the one one step before, then two steps before, three steps before, and so on.\nFor each lag, the ACF produces a single correlation coefficient between +1 and -1. On an ACF plot:\n\nX-axis is the lag (1, 2, 3…).\nY-axis is the correlation coefficient for that lag.\n\nA spike above the significance boundary indicates a meaningful correlation. For example, for daily data, a spike at lag 7 indicates weekly seasonality. For monthly data, a spike at lag 12 would indicate yearly seasonality.\n\n\n\nAutocorrelation function for monthly data, showing yearly seasonality (spike at lag 12 + 24 + 36 + 48). Image source: Monks (2020)",
+    "crumbs": [
+      "GitHub",
+      "ARIMA"
+    ]
+  },
+  {
+    "objectID": "arima.html#stationarity",
+    "href": "arima.html#stationarity",
+    "title": "ARIMA",
+    "section": "Stationarity",
+    "text": "Stationarity\nSource: Monks (2020), Hyndman and Athanasopoulos (2021)\nA stationary time series has no predictable long-term pattern. It has:\n\nNo trend.\nNo seasonality.\nStable variance (the spread of values doesn’t grow or shrink over time).\n\nWe can pre-process a time series to achieve stationarity. Common techniques include:\n\nDifferencing: Taking the first difference means subtracting each observation from the one before it. This removes a trend by focusing on the change between consecutive points rather than their absolute level.\nSeasonal differencing: If the series looks seasonal, subtract observations a full seasonal period apart (e.g., subtracting the value from 12 months earlier removes a yearly pattern in monthly data).\nTransformations: Mathematical transformations are used to simplify the patterns in historical data to make forecasting simpler and more accurate. Any forecasts are produced on a transformed scale, so the data then has to be back-transformed.\n\nIf variances increases or decreases over time, a logarithmic transformation is often useful, since it stablising variance by compressing large values more than small ones.\n\n\nExample:\n\n\n\nRaw data. Image from Monks (2020).\n\n\n\n\n\nLog base 10 transformation. Image from Monks (2020).\n\n\n\n\n\nFirst difference and seasonal difference. Image from Monks (2020).\n\n\nNow it is stationary!",
+    "crumbs": [
+      "GitHub",
+      "ARIMA"
+    ]
+  },
+  {
+    "objectID": "arima.html#references",
+    "href": "arima.html#references",
+    "title": "ARIMA",
+    "section": "References",
+    "text": "References\n\n\nAghili, Seyed Ali Sadeghi. 2023. Auto Correlation Function (ACF) in Detail. https://www.kaggle.com/code/alisadeghiaghili/auto-correlation-function-acf-in-detail.\n\n\nHyndman, Rob., and George. Athanasopoulos. 2021. “The Forecaster’s Toolbox.” Chap. 5 in Forecasting Principles and Practice, 3rd ed. OTexts. https://otexts.com/fpp3/toolbox.html.\n\n\nLearning, ApX Machine. 2026. Autocorrelation Function (ACF). https://apxml.com/courses/time-series-analysis-forecasting/chapter-3-autocorrelation-model-id/autocorrelation-function-acf.\n\n\nMonks, Tom. 2020. Modelling Health System Demand Using ARIMA. https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w.",
+    "crumbs": [
+      "GitHub",
+      "ARIMA"
+    ]
+  },
+  {
     "objectID": "prophet.html",
     "href": "prophet.html",
     "title": "Prophet",
     "section": "",
-    "text": "import pandas as pd\nfrom prophet import Prophet\nfrom prophet.plot import add_changepoints_to_plot\n\nImporting plotly failed. Interactive plots will not work.\nSource: Meta (2026a)\nProphet is an easy-to-use open-source forecasting library available in Python and R, developed by Meta (Facebook).\nIt is designed to handle time series with strong seasonality and holiday effects.",
+    "text": "import pandas as pd\nfrom prophet import Prophet\nfrom prophet.plot import add_changepoints_to_plot\nSource: Meta (2026b)\nProphet is an easy-to-use open-source forecasting library available in Python and R, developed by Meta (Facebook).\nIt is designed to handle time series with strong seasonality and holiday effects.",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -147,7 +180,7 @@
     "href": "prophet.html#prophet-model-structure",
     "title": "Prophet",
     "section": "Prophet model structure",
-    "text": "Prophet model structure\nSource: HSMA (2024), Monks (2020)\nProphet models a time series as a sum of components:\n\nTrend\nSeasonality\nHolidays/special event effects\nError (unexplained noise)",
+    "text": "Prophet model structure\nSource: HSMA (2024), Monks (2020)\nProphet models a time series as a sum of components:\n\nTrend\nSeasonality\nHolidays/special event effects\nError (unexplained noise)\n\nAdditional regressors can also be incorporated.",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -158,7 +191,7 @@
     "href": "prophet.html#trend",
     "title": "Prophet",
     "section": "Trend",
-    "text": "Trend\n\n\n\n\nTrend model\nSource: Meta (2026c)\nProphet supports two models for trend:\nPiecewise linear regression trend model. Linear regression draws a straight line through a dataset. Piecewise linear regression will break the data into intervals and fits a line to each, each with their own slope. This makes it well suited to datasets where the underlying trend isn’t a single straight line but shifts direction over time.\n\n\n\nPiecewise linear regression. Image from EPFL (2021)\n\n\nLogistic growth trend model. This is used when there is a maximum value that can’t be crossed (known as the “carrying capacity”). This model will start to flatten the trend as it approaches that value.\nCode source: Meta (2026c)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_R.csv\"\n)\ndf[\"cap\"] = 8.5\nm = Prophet(growth=\"logistic\")\nm.fit(df)\nfuture = m.make_future_dataframe(periods=1826)\nfuture[\"cap\"] = 8.5\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\n\n\n\n\n\n\n\n\n\n\nTrend changepoints\nSource: Meta (2026d), Monks (2020)\nBoth the linear and logistic growth trend models use changepoints. These are specific points in time where the trend is allowed to shift.\n\nHow are changepoints chosen?\nProphet detects these automatically by testing many possible points, and keeping only those where a change is observed. In more detail:\n\nIt places a many potential changepoints across the first 80% of the data. The count is set by n_changepoints, but it’s usually best to leave this at default and control flexibility via the regularisation parameter below instead.\nIt fits the model using a “sparse Laplace prior” on the size of each changepoint’s rate change. This prior assumes most changepoints have no real effect, shrinking their estimated impact toward zero unless the data strongly supports a shift.\nWhat remains are the changepoints with a meaningfully large rate of change.\n\nThis is a Bayesian approach: rather than deciding in advance how many changepoints are real, Prophet starts with a prior belief (most changepoints don’t matter) and updates it using the data. The Laplace prior is closely related to L1 regularisation (as in Lasso regression). Both shrink small, uncertain effects toward zero while leaving large, well-supported effects largely intact. In practice, most potential changepoints end up negligible, and only a handful with strong evidence shape the trend, preventing it from reacting to minor fluctuations.\nCode source: Meta (2026b), Meta (2026d)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_peyton_manning.csv\"\n)\nm = Prophet()\nm.fit(df)\nfuture = m.make_future_dataframe(periods=365)\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\na = add_changepoints_to_plot(fig.gca(), m, forecast)\n\n\n\n\n\n\n\n\n\n\nAdjusting the trend\nYou can adjust how flexible the trend is via changepoint_prior_scale (default 0.05):\n\nA higher value allows more changepoints to be accepted, giving a more flexible trend and increasing the risk of overfitting to noise.\nA lower value results in fewer changepoints and a smoother trend, but risks missing real shifts in the unverlying trend.\n\nYou can also manually specify known changepoint dates if you already know when significant shifts occurred, rather than relying on automatic detection.\nFitting to only the first 80% of the data helps avoid overfitting to recent fluctuations that may not reflect a genuine long-term shift. However, in some settings, you may wish to adjust this too using changepoint_range.",
+    "text": "Trend\n\n\n\n\nTrend model\nSource: Meta (2026d)\nProphet supports two models for trend:\nPiecewise linear regression trend model. Linear regression draws a straight line through a dataset. Piecewise linear regression will break the data into intervals and fits a line to each, each with their own slope. This makes it well suited to datasets where the underlying trend isn’t a single straight line but shifts direction over time.\n\n\n\nPiecewise linear regression. Image from EPFL (2021)\n\n\nLogistic growth trend model. This is used when there is a maximum value that can’t be crossed (known as the “carrying capacity”). This model will start to flatten the trend as it approaches that value.\nCode source: Meta (2026d)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_R.csv\"\n)\ndf[\"cap\"] = 8.5\nm = Prophet(growth=\"logistic\")\nm.fit(df)\nfuture = m.make_future_dataframe(periods=1826)\nfuture[\"cap\"] = 8.5\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\n\n\n\n\n\n\n\n\n\n\nTrend changepoints\nSource: Meta (2026f), Monks (2020), HSMA (2024)\nBoth the linear and logistic growth trend models use changepoints. These are specific points in time where the trend is allowed to shift.\nA smooth trend with minimal variability implies that things will be similar in the future. It reduces uncertainty. Meanwhile, something with a lot of change points will have a wider prediction interval.\n\nHow are changepoints chosen?\nProphet detects these automatically by testing many possible points, and keeping only those where a change is observed. In more detail:\n\nIt places a many potential changepoints across the first 80% of the data. The count is set by n_changepoints, but it’s usually best to leave this at default and control flexibility via the regularisation parameter below instead.\nIt fits the model using a “sparse Laplace prior” on the size of each changepoint’s rate change. This prior assumes most changepoints have no real effect, shrinking their estimated impact toward zero unless the data strongly supports a shift.\nWhat remains are the changepoints with a meaningfully large rate of change.\n\nThis is a Bayesian approach: rather than deciding in advance how many changepoints are real, Prophet starts with a prior belief (most changepoints don’t matter) and updates it using the data. The Laplace prior is closely related to L1 regularisation (as in Lasso regression). Both shrink small, uncertain effects toward zero while leaving large, well-supported effects largely intact. In practice, most potential changepoints end up negligible, and only a handful with strong evidence shape the trend, preventing it from reacting to minor fluctuations.\nCode source: Meta (2026c), Meta (2026f)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_peyton_manning.csv\"\n)\nm = Prophet()\nm.fit(df)\nfuture = m.make_future_dataframe(periods=365)\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\na = add_changepoints_to_plot(fig.gca(), m, forecast)\n\n\n\n\n\n\n\n\n\n\nAdjusting the trend\nYou can adjust how flexible the trend is via changepoint_prior_scale (default 0.05):\n\nA higher value allows more changepoints to be accepted, giving a more flexible trend and increasing the risk of overfitting to noise.\nA lower value results in fewer changepoints and a smoother trend, but risks missing real shifts in the underlying trend.\n\nYou can also manually specify known changepoint dates if you already know when significant shifts occurred, rather than relying on automatic detection.\nFitting to only the first 80% of the data helps avoid overfitting to recent fluctuations that may not reflect a genuine long-term shift. However, in some settings, you may wish to adjust this too using changepoint_range.",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -169,7 +202,7 @@
     "href": "prophet.html#seasonality",
     "title": "Prophet",
     "section": "Seasonality",
-    "text": "Seasonality",
+    "text": "Seasonality\nSource: Meta (2026e)\nProphet models seasonal patterns using Fourier series. These are mathematical representations built by adding together sine and cosine waves (S-shaped curves with different starting points) of different frequencies. By adding many of these waves together at different speeds and sizes, you can approximate almost any repeating pattern.\n\n\n\nCombination of sine and cosine. Image from Monks (2020) CC-BY.\n\n\nIt can include seasonality at different intervals - by default:\n\nYearly seasonality - repeating pattern across a calendar year (e.g., higher demand in summer, lower in winter).\nWeekly seasonality - repeating pattern within a single week (e.g., peaks on Monday and Friday).\nDaily seasonality - repeating pattern within a single day (e.g., peaks at 8am and 6pm).\n\nYou can also use add_seasonality to add other periods like monthly, quarterly and hourly seasonality.\nProphet checks whether you have enough data before including each default seasonality. For example, yearly and weekly seasonality required at least two cycles (i.e., 2 years and/or 2 weeks). Daily seasonality is only included if your timestamps are sub-daily.\n\nExample of forecast with weekly and yearly seasonality\nSource: Meta (2026e)\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_wp_log_peyton_manning.csv\"\n)\nm = Prophet().fit(df)\nfuture = m.make_future_dataframe(periods=365)\nforecast = m.predict(future)\n\n\nfig = m.plot_components(forecast)\n\n\n\n\n\n\n\n\n\n\nConditional seasonality\nSource: Meta (2026e)\nSeasonality may depend on other factors - for example, if the pattern of weekly seasonnality is different in the summer versus the winter. This can be modelled using conditional seasonalities.\n\nAdd a boolean column to your dataframe marking which season each date falls into.\nDisable the default weekly seasonality.\nAdd custom seasonality terms for each season using add_seasonality(), only applying it to relevant dates marked by the boolean column.\n\n\n\nMultiplicative seasonality\nSource: Meta (2026a)\nBy default, Prophet fits additive seasonality. This means the seasonal effect is added to the trend to get the forecast, so the size of the seasonal effect is constant.\nIf seasonality is not a constant additive factor, but instead growts with trend, this is multiplicative seasonality.\nIn the example below, there is a clear yearly cycle, but with additive seasonality, the model forecast (blue) fits poorly against the actual values (black). The seasonal effect is too large near the start of the series and too small by the end.\n\ndf = pd.read_csv(\n  \"https://raw.githubusercontent.com/facebook/prophet/\" +\n  \"main/examples/example_air_passengers.csv\"\n)\nm = Prophet()\nm.fit(df)\nfuture = m.make_future_dataframe(50, freq=\"MS\")\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)\n\n\n\n\n\n\n\n\nThis can be corrected by setting seasonality_mode=\"multiplicative\", which multiplies the trend by the seasonal component instead of adding it.\n\nm = Prophet(seasonality_mode=\"multiplicative\")\nm.fit(df)\nfuture = m.make_future_dataframe(50, freq=\"MS\")\nforecast = m.predict(future)\n\n\nfig = m.plot(forecast)",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -180,7 +213,7 @@
     "href": "prophet.html#holidays",
     "title": "Prophet",
     "section": "Holidays",
-    "text": "Holidays",
+    "text": "Holidays\nSource: Meta (2026e)\nProphet has built-in support for public holidays and can accept any custom event dates. Each holiday is modelled as a dummy variable (1 on the holiday date, 0 otherwise), with an associated coefficient estimating its effect on the trend. You can use lower_window and upper_window parameters to extend the holiday effect to the days around the date.",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -191,7 +224,29 @@
     "href": "prophet.html#error",
     "title": "Prophet",
     "section": "Error",
-    "text": "Error\nIndependent identically distribution (i.i.d.) errors",
+    "text": "Error\nThe error term captures whatever variation in the data is left over once the trend, seasonality, and holiday components have all been accounted for. It is essentially the noise the model can’t explain.\nProphet assumes errors are independent and identically distributed (i.i.d.): the leftover noise should look the same at every point in time, with no pattern linking one error to the next. If residuals grow over time or cluster around certain dates, that violates i.i.d. and signals unaccounted structure rather than pure noise.",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#additional-regressors",
+    "href": "prophet.html#additional-regressors",
+    "title": "Prophet",
+    "section": "Additional regressors",
+    "text": "Additional regressors\nSource: Meta (2026e)\nExternal variables can be included as additional regressors - for example, weather data, or the performance of a related service.\nYou will need to have future values of that variable available for the forecasting period too, which usually means forecasting it first.",
+    "crumbs": [
+      "GitHub",
+      "Prophet"
+    ]
+  },
+  {
+    "objectID": "prophet.html#prediction-intervals",
+    "href": "prophet.html#prediction-intervals",
+    "title": "Prophet",
+    "section": "Prediction intervals",
+    "text": "Prediction intervals\nSource: (prophet_monks?)\nProphet prediction intervals are nearly always “too” narrow. Potential (complex) solutions:\n\nCombination/Ensemble forecasts - average of Prophet and another method (e.g., ARIMA).\nUse ARIMA to forecast Prophet residuals (errors) then adjust the Prophet forecast accordingly.\nBagging (bootstrap aggregating) - create bootstrap time series, fit and predict from multiple models to capture uncertainty.",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -202,7 +257,7 @@
     "href": "prophet.html#references",
     "title": "Prophet",
     "section": "References",
-    "text": "References\n\n\nEPFL. 2021. Statistical Analysis of Sparse and Piecewise-Linear Regression. https://www.epfl.ch/labs/lcav/statistical-analysis-of-sparse-and-piecewise-linear-regression/.\n\n\nHSMA. 2024. 8B Forecasting: Part 2 - Forecsting with Prophet. https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%202%20-%20Forecasting%20with%20Prophet.pdf.\n\n\nMeta. 2026a. Prophet: Forecasting at Scale. https://facebook.github.io/prophet/.\n\n\nMeta. 2026b. Quick Start. https://facebook.github.io/prophet/docs/quick_start.html.\n\n\nMeta. 2026c. Saturating Forecasts. https://facebook.github.io/prophet/docs/saturating_forecasts.html.\n\n\nMeta. 2026d. Trend Changepoints. https://facebook.github.io/prophet/docs/trend_changepoints.html.\n\n\nMonks, Tom. 2020. Facebook’s Prophet. https://docs.google.com/presentation/d/1MqzgirZyMctmGKaudnoufHZvp06bGS8qbIKI2g-zEz0.",
+    "text": "References\n\n\nEPFL. 2021. Statistical Analysis of Sparse and Piecewise-Linear Regression. https://www.epfl.ch/labs/lcav/statistical-analysis-of-sparse-and-piecewise-linear-regression/.\n\n\nHSMA. 2024. 8B Forecasting: Part 2 - Forecsting with Prophet. https://github.com/hsma-programme/8b_forecasting/blob/main/HSMA%205%20Slides%20-%20Part%202%20-%20Forecasting%20with%20Prophet.pdf.\n\n\nMeta. 2026a. Multiplicative Seasonality. https://facebook.github.io/prophet/docs/multiplicative_seasonality.html.\n\n\nMeta. 2026b. Prophet: Forecasting at Scale. https://facebook.github.io/prophet/.\n\n\nMeta. 2026c. Quick Start. https://facebook.github.io/prophet/docs/quick_start.html.\n\n\nMeta. 2026d. Saturating Forecasts. https://facebook.github.io/prophet/docs/saturating_forecasts.html.\n\n\nMeta. 2026e. Seasonality, Holiday Effects, and Regressors. https://facebook.github.io/prophet/docs//seasonality,_holiday_effects,_and_regressors.html.\n\n\nMeta. 2026f. Trend Changepoints. https://facebook.github.io/prophet/docs/trend_changepoints.html.\n\n\nMonks, Tom. 2020. Facebook’s Prophet. https://docs.google.com/presentation/d/1MqzgirZyMctmGKaudnoufHZvp06bGS8qbIKI2g-zEz0.",
     "crumbs": [
       "GitHub",
       "Prophet"
@@ -235,6 +290,6 @@
     "href": "index.html",
     "title": "Forecasting in Python",
     "section": "",
-    "text": "Author: Amy Heather \nThese are my own notes, written to consolidate my understanding as I learned this topic. They draw heavily on a handful of excellent existing resources. The key sources I used are:\n\nMonks (2020a) — a general introduction to forecasting concepts and workflow.\nMonks (2020b) — a focused walkthrough of ARIMA modelling.\nHyndman and Athanasopoulos (2021) — the standard toolbox reference for forecasting methods and best practice.\nSuleman (2024) — a guide to forecast evaluation metrics.\n\n\nReferences\n\n\nHyndman, Rob., and George. Athanasopoulos. 2021. “The Forecaster’s Toolbox.” Chap. 5 in Forecasting Principles and Practice, 3rd ed. OTexts. https://otexts.com/fpp3/toolbox.html.\n\n\nMonks, Tom. 2020a. An Introduction to Forecasting in Health. https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/.\n\n\nMonks, Tom. 2020b. Modelling Health System Demand Using ARIMA. https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w.\n\n\nSuleman, Eshban. 2024. Understanding Evaluation Metrics for Time Series Forecasting. https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654."
+    "text": "Author: Amy Heather \nThese are my own notes, written to consolidate my understanding as I learned this topic. They draw heavily on a handful of excellent existing resources. The key sources I used are:\n\nMonks (2020a) — a general introduction to forecasting concepts and workflow.\nMonks (2020b) — a focused walkthrough of ARIMA modelling.\nHyndman and Athanasopoulos (2021) — the standard toolbox reference for forecasting methods and best practice.\nSuleman (2024) — a guide to forecast evaluation metrics.\nMeta (2026) - the Prophet documentation.\n\n\nReferences\n\n\nHyndman, Rob., and George. Athanasopoulos. 2021. “The Forecaster’s Toolbox.” Chap. 5 in Forecasting Principles and Practice, 3rd ed. OTexts. https://otexts.com/fpp3/toolbox.html.\n\n\nMeta. 2026. Prophet: Forecasting at Scale. https://facebook.github.io/prophet/.\n\n\nMonks, Tom. 2020a. An Introduction to Forecasting in Health. https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/.\n\n\nMonks, Tom. 2020b. Modelling Health System Demand Using ARIMA. https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w.\n\n\nSuleman, Eshban. 2024. Understanding Evaluation Metrics for Time Series Forecasting. https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654."
   }
 ]

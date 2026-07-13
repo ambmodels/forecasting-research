@@ -62,6 +62,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-9a805087ab83cad7e60272d68a3f1f35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -183,12 +186,6 @@ background-size: cover;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./transformation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Transformation</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./prophet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prophet</span></a>
   </div>
@@ -197,6 +194,12 @@ background-size: cover;
   <div class="sidebar-item-container"> 
   <a href="./arima.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">ARIMA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./other_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other methods</span></a>
   </div>
 </li>
     </ul>
@@ -209,7 +212,9 @@ background-size: cover;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link active" data-scroll-target="#autocorrelation">Autocorrelation</a></li>
+  <li><a href="#stationarity" id="toc-stationarity" class="nav-link" data-scroll-target="#stationarity">Stationarity</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -220,10 +225,77 @@ background-size: cover;
 
 
 
+<section id="autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="autocorrelation">Autocorrelation</h2>
+<p><span class="source-note">Source: <span class="citation" data-cites="apx_acf">Learning (<a href="#ref-apx_acf" role="doc-biblioref">2026</a>)</span>, <span class="citation" data-cites="seyed_acf">Aghili (<a href="#ref-seyed_acf" role="doc-biblioref">2023</a>)</span></span></p>
+<p>Autocorrelation is the correlation between observations within a time series, measured using the <strong>autocorrelation function (ACF)</strong>. It calculates how correlated a series is with lagged versions of itself, comparing each value to the one one step before, then two steps before, three steps before, and so on.</p>
+<p>For each lag, the ACF produces a single correlation coefficient between +1 and -1. On an ACF plot:</p>
+<ul>
+<li><strong>X-axis</strong> is the lag (1, 2, 3…).</li>
+<li><strong>Y-axis</strong> is the correlation coefficient for that lag.</li>
+</ul>
+<p>A spike above the significance boundary indicates a meaningful correlation. For example, for daily data, a spike at lag 7 indicates weekly seasonality. For monthly data, a spike at lag 12 would indicate yearly seasonality.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/acf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Autocorrelation function for monthly data, showing yearly seasonality (spike at lag 12 + 24 + 36 + 48). Image source: @monks_arima"><img src="./images/acf.png" class="img-fluid figure-img" alt="Autocorrelation function for monthly data, showing yearly seasonality (spike at lag 12 + 24 + 36 + 48). Image source: Monks (2020)"></a></p>
+<figcaption>Autocorrelation function for monthly data, showing yearly seasonality (spike at lag 12 + 24 + 36 + 48). Image source: <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="stationarity" class="level2">
+<h2 class="anchored" data-anchor-id="stationarity">Stationarity</h2>
+<p><span class="source-note">Source: <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2021</a>)</span></span></p>
+<p>A stationary time series has no predictable long-term pattern. It has:</p>
+<ul>
+<li>No trend.</li>
+<li>No seasonality.</li>
+<li>Stable variance (the spread of values doesn’t grow or shrink over time).</li>
+</ul>
+<p>We can pre-process a time series to achieve stationarity. Common techniques include:</p>
+<ul>
+<li><p><strong>Differencing:</strong> Taking the first difference means subtracting each observation from the one before it. This removes a trend by focusing on the change between consecutive points rather than their absolute level.</p></li>
+<li><p><strong>Seasonal differencing:</strong> If the series looks seasonal, subtract observations a full seasonal period apart (e.g., subtracting the value from 12 months earlier removes a yearly pattern in monthly data).</p></li>
+<li><p><strong>Transformations:</strong> Mathematical transformations are used to simplify the patterns in historical data to make forecasting simpler and more accurate. Any forecasts are produced on a transformed scale, so the data then has to be back-transformed.</p>
+<ul>
+<li>If variances increases or decreases over time, a <strong>logarithmic transformation</strong> is often useful, since it stablising variance by compressing large values more than small ones.</li>
+</ul></li>
+</ul>
+<p>Example:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/stationary_raw.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Raw data. Image from @monks_arima."><img src="./images/stationary_raw.png" class="img-fluid figure-img" alt="Raw data. Image from Monks (2020)."></a></p>
+<figcaption>Raw data. Image from <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020</a>)</span>.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/stationary_log.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Log base 10 transformation. Image from @monks_arima."><img src="./images/stationary_log.png" class="img-fluid figure-img" alt="Log base 10 transformation. Image from Monks (2020)."></a></p>
+<figcaption>Log base 10 transformation. Image from <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020</a>)</span>.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/stationary_difference.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="First difference and seasonal difference. Image from @monks_arima."><img src="./images/stationary_difference.png" class="img-fluid figure-img" alt="First difference and seasonal difference. Image from Monks (2020)."></a></p>
+<figcaption>First difference and seasonal difference. Image from <span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020</a>)</span>.</figcaption>
+</figure>
+</div>
+<p>Now it is stationary!</p>
+</section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-seyed_acf" class="csl-entry" role="listitem">
+Aghili, Seyed Ali Sadeghi. 2023. <em>Auto Correlation Function (ACF) in Detail</em>. <a href="https://www.kaggle.com/code/alisadeghiaghili/auto-correlation-function-acf-in-detail">https://www.kaggle.com/code/alisadeghiaghili/auto-correlation-function-acf-in-detail</a>.
+</div>
+<div id="ref-hyndman_toolbox" class="csl-entry" role="listitem">
+Hyndman, Rob., and George. Athanasopoulos. 2021. <span>“The Forecaster’s Toolbox.”</span> Chap. 5 in <em>Forecasting Principles and Practice</em>, 3rd ed. OTexts. <a href="https://otexts.com/fpp3/toolbox.html">https://otexts.com/fpp3/toolbox.html</a>.
+</div>
+<div id="ref-apx_acf" class="csl-entry" role="listitem">
+Learning, ApX Machine. 2026. <em>Autocorrelation Function (ACF)</em>. <a href="https://apxml.com/courses/time-series-analysis-forecasting/chapter-3-autocorrelation-model-id/autocorrelation-function-acf">https://apxml.com/courses/time-series-analysis-forecasting/chapter-3-autocorrelation-model-id/autocorrelation-function-acf</a>.
+</div>
+<div id="ref-monks_arima" class="csl-entry" role="listitem">
+Monks, Tom. 2020. <em>Modelling Health System Demand Using ARIMA</em>. <a href="https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w">https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w</a>.
+</div>
 </div>
 
 
@@ -631,6 +703,38 @@ background-size: cover;
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

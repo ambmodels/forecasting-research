@@ -62,6 +62,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-9a805087ab83cad7e60272d68a3f1f35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -183,12 +186,6 @@ background-size: cover;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./transformation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Transformation</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./prophet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prophet</span></a>
   </div>
@@ -197,6 +194,12 @@ background-size: cover;
   <div class="sidebar-item-container"> 
   <a href="./arima.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ARIMA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./other_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other methods</span></a>
   </div>
 </li>
     </ul>
@@ -381,7 +384,7 @@ background-size: cover;
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/rolling_forecast_origin.png" class="img-fluid figure-img"></p>
+<p><a href="./images/rolling_forecast_origin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Cross-validation with rolling forecast origin. Image from @monks_intro_to_forecasting (CC-BY)."><img src="./images/rolling_forecast_origin.png" class="img-fluid figure-img" alt="Cross-validation with rolling forecast origin. Image from Monks (2020) (CC-BY)."></a></p>
 <figcaption>Cross-validation with rolling forecast origin. Image from <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020</a>)</span> (CC-BY).</figcaption>
 </figure>
 </div>
@@ -392,7 +395,7 @@ background-size: cover;
 <p>A variant where instead of expanding the training window, you slide a fixed-size window forward, so older data is dropped from training as new data is added. Useful when you believe very old data is less relevant.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/sliding_window.png" class="img-fluid figure-img"></p>
+<p><a href="./images/sliding_window.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Cross-validation with sliding window. Image from @monks_intro_to_forecasting (CC-BY)."><img src="./images/sliding_window.png" class="img-fluid figure-img" alt="Cross-validation with sliding window. Image from Monks (2020) (CC-BY)."></a></p>
 <figcaption>Cross-validation with sliding window. Image from <span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020</a>)</span> (CC-BY).</figcaption>
 </figure>
 </div>
@@ -829,6 +832,38 @@ Wikipedia. 2025. <em>Mean Absolute Scaled Error</em>. <a href="https://en.wikipe
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
