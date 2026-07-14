@@ -6,4 +6,10 @@ format:
     css: /style/page_style.css
 ---
 
-combination/ensemble forecasts
+## Combination/ensemble forecasts
+
+<span class="source-note">Source: @hyndman_issues</span>
+
+Forecast accuracy can be improved by using several different methods on the same time series, and averaging the resulting forecasts.
+
+Using a simple mean is often best.
