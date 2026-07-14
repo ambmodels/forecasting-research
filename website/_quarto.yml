@@ -13,10 +13,10 @@ website:
     contents:
       - introduction.qmd
       - naive.qmd
-      - evaluation.qmd
       - prophet.qmd
       - arima.qmd
       - other_methods.qmd
+      - evaluation.qmd
 
 format:
   html:

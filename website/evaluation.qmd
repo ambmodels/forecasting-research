@@ -115,6 +115,8 @@ The average Winkler score divided by the one-step in-sample Naïve1 or SNaïve.
 
 ## Data sets
 
+<div class="h3-tight"></div>
+
 ### Train-test split
 
 <span class="source-note">Source: @monks_intro_to_forecasting</span>
