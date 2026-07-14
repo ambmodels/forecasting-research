@@ -5,3 +5,88 @@ format:
   html:
     css: /style/page_style.css
 ---
+
+## Data
+
+<div class="h3-tight"></div>
+
+### Historic
+
+Daily count of:
+
+* Incidents (`Incidents`).
+* Responses (`Responses`).
+* Calls (`Calls` and `Calls_Other`).
+* Sickness (`Sickness`).
+* Unplanned absence (`Unplanned`).
+
+For the whole trust `['Trust']` and for each region `['Gloucestershire', 'BNSSG', 'Cornwall', 'Dorset', 'BSW', 'Somerset', 'Devon']`.
+
+### Holidays
+
+Bank holidays and school holiday dates per region, plus lower-upper window defining how many days before/after holiday the effect should be felt.
+
+## Models
+
+<div class="h3-tight"></div>
+
+### Prophet
+
+`predict_prophet_stf`
+
+* `changepoint_range` is 1 for responses and 0.8 for other outcomes.
+* `changepoint_prior_scale` is 0.5 for responses and 0.05 for other outcomes.
+* Weekly and yearly seasonality.
+
+### Ensemble
+
+`default_ensemble`
+
+ARIMA model within the ensemble (`ProphetARIMAEnsemble`, `get_best_arima_parameters`):
+
+* Regression with ARIMA errors.
+* Non-seasonal order (p,d,q) = (1,1,3): 1 AR term, first-order differencing, 3 MA terms.
+* Seasonal order (P,D,Q,m) = (1,0,1,7): weekly seasonality with 1 seasonal AR term, 1 seasonal MA term, and no seasonal differencing.
+* Single binary holiday dummy flags whether a date falls in a holiday window. Collapses all holidays (e.g., New Years Day, Easter, Bank Holiday) into one undifferentiated effect rather than modelling each holiday type separately.
+* `enforce_stationarity=False`.
+
+The point forecast error (`y_hat`) and prediction intervals (`yhat_lower_95` and `yhat_upper_95`) are determined by finding the mean of the Prophet and ARIMA results.
+
+```{.python}
+df['yhat'] = (df['prophet_mean'].values + df['arima_mean'].values ) / 2
+df['yhat_lower_95'] = (df['prophet_lower_95'].values + df['arima_lower_95'].values ) / 2
+df['yhat_upper_95'] = (df['prophet_upper_95'].values + df['arima_upper_95'].values ) / 2
+```
+
+<!-- TODO:
+
+get_best_arima_parameters is not being used - the same values are used, except hard-coded into ProphetARIMAEnsemble.
+
+-->
+
+## Forecast
+
+42-day-ahead forecast. Starting point is last Monday (i.e., next Monday, minus seven days).
+
+Responses and incidents are forecast for each region and for whole trust. Calls, sickness and unplanned absence are all only forecast at the trust level.
+
+The forecast dataframe contains:
+
+* ARIMA results for `Calls` and `Responses`.
+* Ensemble results for all other outcomes.
+
+<!-- TODO:
+
+Why is ARIMA for those and Ensemble for others?
+
+How chose to use these models?
+
+How chose ARIMA param?
+
+How perform validation?
+
+Why chosen forecast horizon?
+
+What is the new request - shorter horizon?
+
+-->
