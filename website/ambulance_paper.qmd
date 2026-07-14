@@ -1,0 +1,107 @@
+---
+title: Paper
+bibliography: references.bib
+format:
+  html:
+    css: /style/page_style.css
+---
+
+## Paper and GitHub repositories
+
+Monks, T., Harper, A., Allen, M. et al. Forecasting the daily demand for emergency medical ambulances in England and Wales: a benchmark model and external validation. BMC Med Inform Decis Mak 23, 117 (2023). <https://doi.org/10.1186/s12911-023-02218-z>.
+
+<https://github.com/TomMonks/swast-benchmarking>
+
+<https://github.com/TomMonks/swast-forecast-tool>
+
+## Data
+
+Daily count of emergency calls that resulted in ambulance dispatch.
+
+Screened time series for anomalies, then divided:
+
+* Training (1 January 2013 to 30 June 2017, n=1279).
+* Validation (1 July 2017 to 31 December 2018, n=549).
+* Test (1 January 2019 to 31 December 2019, n=365).
+
+*There appears to be an error in the paper dates. It says validation ends 31 January 2018, but have confirmed from notebook that it is December.*
+
+## Models
+
+**Naive benchmark:** Seasonal Naive method - using the most recent observation from the same day of the week and carrying it forward (e.g., if forecasting next Tuesday, use the observation from the most recent Tuesday as the predicted value).
+
+**Candidate models:**
+
+1. Holt-Winters Exponential Smoothing
+2. Automatic Autoregressive Integrated Moving Average (autoARIMA)
+3. Lagged regression (autoregression) with holidays and seasonal indexes
+4. Lagged regularised regression (elastic-net) with seasonal indexes
+5. Regression with holidays and ARIMA errors
+6. Regression with holidays, seasonal indexes and ARIMA errors
+7. Harmonic Regression (fourier terms) with holidays
+8. Singular Spectrum Analysis
+9. Facebook Prophet
+10. Trigonometric seasonality, Box-Cox transformation (TBATS)
+11. Comb: Simple Exponential Smoothing, Linear Trend, damped trend
+12. Ensemble of:
+    * Holt-Winters Exponental Smoothing (1).
+    * Regression with holiday and ARIMA errors (5).
+13. Ensemble of:
+    * Regression with holiday and ARIMA errors (5).
+    * Facebook Prophet (9).
+14. Ensemble of:
+    * Holt-Winters Exponential Smoothing (1).
+    * Regression with holidays and ARIMA errors (5).
+    * Facebook Prophet (9)
+
+*There appears to be some errors in the table in the paper. The above list of candidates was corrected based on the descriptions from the notebooks. In the paper, it says model 12 is actually 1+2 (not 1+5), and that model 13 is 5+7 (not 5+9).*
+
+## Evaluation
+
+**Point forecast error:**
+
+* Mean Absolute Scaled Error (MASE)
+    * Easy to understand.
+    * Relative so can compare across ambulance trusts.
+    * Scaled the out of sample mean absolute error by the equivalent one-step within-sample error from a Seasonal Naive model.
+* Symmetric Mean Absolute Percentage Error (sMAPE)
+* Root Mean Absolute Squared Error (RMSE)
+    * As it has been used elsewhere, but can only be used in the context of the specific time series.
+
+**Prediction interval coverage (80% and 95%)** (i.e., the proportion of out-of-sample observations that fall within a prediction interval with an expected probability. For example, it is expected that 80% of points will fall within an 80% prediction interval.)
+
+## Workflow
+
+<div class="h3-tight"></div>
+
+### Stage 1: Screening
+
+Using daily counts for the whole-trust (SWAST), all candidate models and the naive benchmark were fit on the training set and evaluated on the validation set.
+
+Model selection used rolling-origin time series cross-validation with a 7-day stride, forecasting up to a 365-day horizon (27 folds).
+
+The top 2 models were selected based on MASE and prediction interval coverage, relative to the naive model.
+
+### Stage 2: Elite screening
+
+The top 2 models were carried forward.
+
+SWAST data were disaggregated into 7 regional (sub-trust) time series, and the models were refit and re-evaluated on each region.
+
+Forecasting an 84-day horizon, with enough data for 67 validation folds.
+
+### Stage 3: Simulated forecast setting
+
+The single best-performing model was carried forward.
+
+It was tested on the held-out test set (not validation) across the 7 regional series, generating forecasts for a horizon of 7 to 84 days. This produced a distribution of MASE and coverage values across horizons and regions.
+
+### Stage 4: External evaluation
+
+The selected model was then tested on 13 independent external time series (from other ambulance trusts), each split into training, validation, and test sets, to confirm the benchmark generalises beyond SWAST.
+
+## Results
+
+In stage 1, the best models were Prophet (model 7) and Prophet-Regression with ARIMA errors ensemble (model 13).
+
+In stage 2, the MASE was similar for the models for the sub-regions, but the median prediction interval coverage was more consistent for the ensemble than for Prophet.

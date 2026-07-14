@@ -11,12 +11,18 @@ website:
   sidebar:
     style: docked
     contents:
-      - introduction.qmd
-      - naive.qmd
-      - prophet.qmd
-      - arima.qmd
-      - other_methods.qmd
-      - evaluation.qmd
+      - section: "Forecasting"
+        contents:
+        - introduction.qmd
+        - naive.qmd
+        - prophet.qmd
+        - arima.qmd
+        - other_methods.qmd
+        - evaluation.qmd
+      - section: "Ambulances"
+        contents:
+        - ambulance_paper.qmd
+        - ambulance_notebook.qmd
 
 format:
   html:
