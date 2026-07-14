@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forecasting in Python</title>
+<title>Forecasting: Theory and Research Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -117,7 +98,7 @@ p.subtitle.lead {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Forecasting in Python</span>
+    <span class="navbar-title">Forecasting: Theory and Research Notes</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -142,7 +123,7 @@ p.subtitle.lead {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Forecasting in Python</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Forecasting: Theory and Research Notes</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -152,8 +133,7 @@ p.subtitle.lead {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-right">
-      <h1 class="title">Forecasting in Python</h1>
-            <p class="subtitle lead">A beginner-friendly introduction to time-series forecasting</p>
+      <h1 class="title">Forecasting: Theory and Research Notes</h1>
                       </div>
   </div>
     
@@ -174,7 +154,7 @@ p.subtitle.lead {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Forecasting</span></a>
+ <span class="menu-text">Theory</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -221,7 +201,7 @@ p.subtitle.lead {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Ambulances</span></a>
+ <span class="menu-text">Research Notes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -237,6 +217,12 @@ p.subtitle.lead {
   <div class="sidebar-item-container"> 
   <a href="./ambulance_notebook.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ambulance_project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project</span></a>
   </div>
 </li>
       </ul>
@@ -255,36 +241,13 @@ p.subtitle.lead {
 
 
 <p><strong>Author:</strong> <a href="https://amyheather.github.io/">Amy Heather</a> <a href="https://orcid.org/0000-0002-6596-3479"><img src="./images/ORCIDiD_icon16x16.png" class="img-fluid" alt="ORCID logo"></a></p>
-<p>These are my own notes, written to consolidate my understanding as I learned this topic. They draw heavily on a handful of excellent existing resources. The key sources I used are:</p>
+<p>This site contains:</p>
 <ul>
-<li><span class="citation" data-cites="monks_intro_to_forecasting">Monks (<a href="#ref-monks_intro_to_forecasting" role="doc-biblioref">2020a</a>)</span> — a general introduction to forecasting concepts and workflow.</li>
-<li><span class="citation" data-cites="monks_arima">Monks (<a href="#ref-monks_arima" role="doc-biblioref">2020b</a>)</span> — a focused walkthrough of ARIMA modelling.</li>
-<li><span class="citation" data-cites="hyndman_toolbox">Hyndman and Athanasopoulos (<a href="#ref-hyndman_toolbox" role="doc-biblioref">2021</a>)</span> — the standard toolbox reference for forecasting methods and best practice.</li>
-<li><span class="citation" data-cites="suleman_metrics">Suleman (<a href="#ref-suleman_metrics" role="doc-biblioref">2024</a>)</span> — a guide to forecast evaluation metrics.</li>
-<li><span class="citation" data-cites="prophet_home">Meta (<a href="#ref-prophet_home" role="doc-biblioref">2026</a>)</span> - the Prophet documentation.</li>
+<li><p><strong>Theory:</strong> Beginner friendly introduction to forecasting, including ARIMA and Prophet. Draws heavily on a range of existing resources (cited within).</p></li>
+<li><p><strong>Research notes:</strong> Describes existing research with the South Western Ambulance Service NHS Foundation Trust (SWASFT) and plans for ongoing work.</p></li>
 </ul>
-<section id="references" class="level3">
-<h3 class="anchored" data-anchor-id="references">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-hyndman_toolbox" class="csl-entry" role="listitem">
-Hyndman, Rob., and George. Athanasopoulos. 2021. <span>“The Forecaster’s Toolbox.”</span> Chap. 5 in <em>Forecasting Principles and Practice</em>, 3rd ed. OTexts. <a href="https://otexts.com/fpp3/toolbox.html">https://otexts.com/fpp3/toolbox.html</a>.
-</div>
-<div id="ref-prophet_home" class="csl-entry" role="listitem">
-Meta. 2026. <em>Prophet: Forecasting at Scale</em>. <a href="https://facebook.github.io/prophet/">https://facebook.github.io/prophet/</a>.
-</div>
-<div id="ref-monks_intro_to_forecasting" class="csl-entry" role="listitem">
-Monks, Tom. 2020a. <em>An Introduction to Forecasting in Health</em>. <a href="https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/">https://docs.google.com/presentation/d/1zfTUgY7ysnt7zGA_ZJSANv3pxTBxsOoIqsJW-0hcj4s/</a>.
-</div>
-<div id="ref-monks_arima" class="csl-entry" role="listitem">
-Monks, Tom. 2020b. <em>Modelling Health System Demand Using ARIMA</em>. <a href="https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w">https://docs.google.com/presentation/d/1CD5rWyjdhCcQDOYaAbhXlCE0ilZVBmq7dDL14IzIt5w</a>.
-</div>
-<div id="ref-suleman_metrics" class="csl-entry" role="listitem">
-Suleman, Eshban. 2024. <em>Understanding Evaluation Metrics for Time Series Forecasting</em>. <a href="https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654">https://eshban9492.medium.com/understanding-evaluation-metrics-for-time-series-forecasting-5c8a3c877654</a>.
-</div>
-</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

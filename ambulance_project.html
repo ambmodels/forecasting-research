@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Paper – Forecasting: Theory and Research Notes</title>
+<title>Project – Forecasting: Theory and Research Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -116,7 +116,7 @@ background-size: cover;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ambulance_paper.html">Research Notes</a></li><li class="breadcrumb-item"><a href="./ambulance_paper.html">Paper</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ambulance_paper.html">Research Notes</a></li><li class="breadcrumb-item"><a href="./ambulance_project.html">Project</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -125,8 +125,8 @@ background-size: cover;
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ambulance_paper.html">Research Notes</a></li><li class="breadcrumb-item"><a href="./ambulance_paper.html">Paper</a></li></ol></nav>
-      <h1 class="title">Paper</h1>
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ambulance_paper.html">Research Notes</a></li><li class="breadcrumb-item"><a href="./ambulance_project.html">Project</a></li></ol></nav>
+      <h1 class="title">Project</h1>
                       </div>
   </div>
     
@@ -202,7 +202,7 @@ background-size: cover;
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ambulance_paper.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ambulance_paper.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Paper</span></a>
   </div>
 </li>
@@ -214,7 +214,7 @@ background-size: cover;
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ambulance_project.html" class="sidebar-item-text sidebar-link">
+  <a href="./ambulance_project.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Project</span></a>
   </div>
 </li>
@@ -230,18 +230,9 @@ background-size: cover;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#paper-and-github-repositories" id="toc-paper-and-github-repositories" class="nav-link active" data-scroll-target="#paper-and-github-repositories">Paper and GitHub repositories</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
-  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation">Evaluation</a></li>
-  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
-  <ul class="collapse">
-  <li><a href="#stage-1-screening" id="toc-stage-1-screening" class="nav-link" data-scroll-target="#stage-1-screening">Stage 1: Screening</a></li>
-  <li><a href="#stage-2-elite-screening" id="toc-stage-2-elite-screening" class="nav-link" data-scroll-target="#stage-2-elite-screening">Stage 2: Elite screening</a></li>
-  <li><a href="#stage-3-simulated-forecast-setting" id="toc-stage-3-simulated-forecast-setting" class="nav-link" data-scroll-target="#stage-3-simulated-forecast-setting">Stage 3: Simulated forecast setting</a></li>
-  <li><a href="#stage-4-external-evaluation" id="toc-stage-4-external-evaluation" class="nav-link" data-scroll-target="#stage-4-external-evaluation">Stage 4: External evaluation</a></li>
-  </ul></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#short-term-forecasting" id="toc-short-term-forecasting" class="nav-link active" data-scroll-target="#short-term-forecasting">Short-term forecasting</a></li>
+  <li><a href="#prediction-intervals-in-long-term-forecasts" id="toc-prediction-intervals-in-long-term-forecasts" class="nav-link" data-scroll-target="#prediction-intervals-in-long-term-forecasts">Prediction intervals in long term forecasts</a></li>
+  <li><a href="#handling-covid-data" id="toc-handling-covid-data" class="nav-link" data-scroll-target="#handling-covid-data">Handling COVID data</a></li>
   </ul>
 </nav>
     </div>
@@ -252,107 +243,37 @@ background-size: cover;
 
 
 
-<section id="paper-and-github-repositories" class="level2">
-<h2 class="anchored" data-anchor-id="paper-and-github-repositories">Paper and GitHub repositories</h2>
-<p>Monks, T., Harper, A., Allen, M. et al.&nbsp;Forecasting the daily demand for emergency medical ambulances in England and Wales: a benchmark model and external validation. BMC Med Inform Decis Mak 23, 117 (2023). <a href="https://doi.org/10.1186/s12911-023-02218-z" class="uri">https://doi.org/10.1186/s12911-023-02218-z</a>.</p>
-<p><a href="https://github.com/TomMonks/swast-benchmarking" class="uri">https://github.com/TomMonks/swast-benchmarking</a></p>
-<p><a href="https://github.com/TomMonks/swast-forecast-tool" class="uri">https://github.com/TomMonks/swast-forecast-tool</a></p>
-</section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>Daily count of emergency calls that resulted in ambulance dispatch.</p>
-<p>Screened time series for anomalies, then divided:</p>
+<p>There are three objectives:</p>
 <ul>
-<li>Training (1 January 2013 to 30 June 2017, n=1279).</li>
-<li>Validation (1 July 2017 to 31 December 2018, n=549).</li>
-<li>Test (1 January 2019 to 31 December 2019, n=365).</li>
+<li>Short-term forecasting.</li>
+<li>Prediction intervals in long term forecasts.</li>
+<li>Handling COVID data.</li>
 </ul>
-<p><em>There appears to be an error in the paper dates. It says validation ends 31 January 2018, but have confirmed from notebook that it is December.</em></p>
-</section>
-<section id="models" class="level2">
-<h2 class="anchored" data-anchor-id="models">Models</h2>
-<p><strong>Naive benchmark:</strong> Seasonal Naive method - using the most recent observation from the same day of the week and carrying it forward (e.g., if forecasting next Tuesday, use the observation from the most recent Tuesday as the predicted value).</p>
-<p><strong>Candidate models:</strong></p>
-<ol type="1">
-<li>Holt-Winters Exponential Smoothing</li>
-<li>Automatic Autoregressive Integrated Moving Average (autoARIMA)</li>
-<li>Lagged regression (autoregression) with holidays and seasonal indexes</li>
-<li>Lagged regularised regression (elastic-net) with seasonal indexes</li>
-<li>Regression with holidays and ARIMA errors</li>
-<li>Regression with holidays, seasonal indexes and ARIMA errors</li>
-<li>Harmonic Regression (fourier terms) with holidays</li>
-<li>Singular Spectrum Analysis</li>
-<li>Facebook Prophet</li>
-<li>Trigonometric seasonality, Box-Cox transformation (TBATS)</li>
-<li>Comb: Simple Exponential Smoothing, Linear Trend, damped trend</li>
-<li>Ensemble of:
+<p>The priority to start with is short-term forecasting.</p>
+<section id="short-term-forecasting" class="level2">
+<h2 class="anchored" data-anchor-id="short-term-forecasting">Short-term forecasting</h2>
+<p>Focus on short-term forecasts (up to about a week), anticipating demand for a given week.</p>
+<p>Interested in incorporating features for demand spikes -</p>
 <ul>
-<li>Holt-Winters Exponental Smoothing (1).</li>
-<li>Regression with holiday and ARIMA errors (5).</li>
-</ul></li>
-<li>Ensemble of:
-<ul>
-<li>Regression with holiday and ARIMA errors (5).</li>
-<li>Facebook Prophet (9).</li>
-</ul></li>
-<li>Ensemble of:
-<ul>
-<li>Holt-Winters Exponential Smoothing (1).</li>
-<li>Regression with holidays and ARIMA errors (5).</li>
-<li>Facebook Prophet (9)</li>
-</ul></li>
-</ol>
-<p><em>There appears to be some errors in the table in the paper. The above list of candidates was corrected based on the descriptions from the notebooks. In the paper, it says model 12 is actually 1+2 (not 1+5), and that model 13 is 5+7 (not 5+9).</em></p>
-</section>
-<section id="evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="evaluation">Evaluation</h2>
-<p><strong>Point forecast error:</strong></p>
-<ul>
-<li>Mean Absolute Scaled Error (MASE)
-<ul>
-<li>Easy to understand.</li>
-<li>Relative so can compare across ambulance trusts.</li>
-<li>Scaled the out of sample mean absolute error by the equivalent one-step within-sample error from a Seasonal Naive model.</li>
-</ul></li>
-<li>Symmetric Mean Absolute Percentage Error (sMAPE)</li>
-<li>Root Mean Absolute Squared Error (RMSE)
-<ul>
-<li>As it has been used elsewhere, but can only be used in the context of the specific time series.</li>
-</ul></li>
+<li>Weather information (e.g., heatwaves)</li>
+<li>Seasonal diseases</li>
 </ul>
-<p><strong>Prediction interval coverage (80% and 95%)</strong> (i.e., the proportion of out-of-sample observations that fall within a prediction interval with an expected probability. For example, it is expected that 80% of points will fall within an 80% prediction interval.)</p>
+<p>SWAST have historical temperature data from 2017 to 2025 for every weather station in the South West and can help get any other weather type data eg. rainfall, wind, snow if useful.</p>
+<p>SWAST also have an API that can download the seasonal disease info from UKHSA every week.</p>
+<p><em>Additional notes: Relationship potentially changed since COVID? Also, Nav shared <a href="https://doi.org/10.1057/jors.2011.160" class="uri">https://doi.org/10.1057/jors.2011.160</a>.</em></p>
 </section>
-<section id="workflow" class="level2">
-<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
-<div class="h3-tight">
-
-</div>
-<section id="stage-1-screening" class="level3">
-<h3 class="anchored" data-anchor-id="stage-1-screening">Stage 1: Screening</h3>
-<p>Using daily counts for the whole-trust (SWAST), all candidate models and the naive benchmark were fit on the training set and evaluated on the validation set.</p>
-<p>Model selection used rolling-origin time series cross-validation with a 7-day stride, forecasting up to a 365-day horizon (27 folds).</p>
-<p>The top 2 models were selected based on MASE and prediction interval coverage, relative to the naive model.</p>
+<section id="prediction-intervals-in-long-term-forecasts" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-intervals-in-long-term-forecasts">Prediction intervals in long term forecasts</h2>
+<p>Want to improve prediction/uncertainty intervals for longer forecasts (e.g., several months).</p>
+<p>Consider conformal prediction.</p>
 </section>
-<section id="stage-2-elite-screening" class="level3">
-<h3 class="anchored" data-anchor-id="stage-2-elite-screening">Stage 2: Elite screening</h3>
-<p>The top 2 models were carried forward.</p>
-<p>SWAST data were disaggregated into 7 regional (sub-trust) time series, and the models were refit and re-evaluated on each region.</p>
-<p>Forecasting an 84-day horizon, with enough data for 67 validation folds.</p>
-</section>
-<section id="stage-3-simulated-forecast-setting" class="level3">
-<h3 class="anchored" data-anchor-id="stage-3-simulated-forecast-setting">Stage 3: Simulated forecast setting</h3>
-<p>The single best-performing model was carried forward.</p>
-<p>It was tested on the held-out test set (not validation) across the 7 regional series, generating forecasts for a horizon of 7 to 84 days. This produced a distribution of MASE and coverage values across horizons and regions.</p>
-</section>
-<section id="stage-4-external-evaluation" class="level3">
-<h3 class="anchored" data-anchor-id="stage-4-external-evaluation">Stage 4: External evaluation</h3>
-<p>The selected model was then tested on 13 independent external time series (from other ambulance trusts), each split into training, validation, and test sets, to confirm the benchmark generalises beyond SWAST.</p>
-</section>
-</section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>In stage 1, the best models were Prophet (model 7) and Prophet-Regression with ARIMA errors ensemble (model 13).</p>
-<p>In stage 2, the MASE was similar for the models for the sub-regions, but the median prediction interval coverage was more consistent for the ensemble than for Prophet.</p>
+<section id="handling-covid-data" class="level2">
+<h2 class="anchored" data-anchor-id="handling-covid-data">Handling COVID data</h2>
+<p>Decide how to handle lockdown data.</p>
+<ul>
+<li>Should it be dropped?</li>
+<li>Should it be retained as an intervention variable in line with prophet approach?</li>
+</ul>
 
 
 </section>
