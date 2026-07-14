@@ -1,6 +1,6 @@
 ---
-title: "Forecasting"
-subtitle: "A beginner-friendly introduction to time-series forecasting"
+title: "Forecasting: Theory and Research Notes"
+# subtitle: ""
 bibliography: references.bib
 include-in-header:
   - text: |
@@ -20,17 +20,9 @@ format:
 
 **Author:** [Amy Heather](https://amyheather.github.io/) [![ORCID logo](/images/ORCIDiD_icon16x16.png)](https://orcid.org/0000-0002-6596-3479)
 
-These are my own notes, written to consolidate my understanding as I learned this topic. They cover general forecasting theory, plus applied notes prepared as part of internship work.
 
-They draw heavily on a handful of excellent existing resources. The key sources I used are:
+This site contains:
 
-- @monks_intro_to_forecasting — a general introduction to forecasting concepts and workflow.
-- @monks_arima — a focused walkthrough of ARIMA modelling.
-- @hyndman_toolbox — the standard toolbox reference for forecasting methods and best practice.
-- @suleman_metrics — a guide to forecast evaluation metrics.
-- @prophet_home - the Prophet documentation.
+* **Theory:** Beginner friendly introduction to forecasting, including ARIMA and Prophet. Draws heavily on a range of existing resources (cited within).
 
-### References
-
-::: {#refs}
-:::
+* **Research notes:** Describes existing research with the South Western Ambulance Service NHS Foundation Trust (SWASFT) and plans for ongoing work.
