@@ -61,3 +61,31 @@ h4 {
   max-width: 100%;
   height: auto;
 }
+
+/* Breadcrumb items (i.e., page > page) */
+.breadcrumb {
+  border: 0px;
+}
+.quarto-secondary-nav nav.quarto-page-breadcrumbs a {
+  color: #cad6dd;
+}
+.quarto-title-banner a {
+  color: #cad6dd;
+}
+.quarto-title-breadcrumbs .breadcrumb li:last-of-type a {
+  color: #cad6dd;
+}
+
+/* Navbar/sidebar toggle button background and text/icon color */
+.quarto-secondary-nav .quarto-btn-toggle.btn {
+  background-color: #660033;
+  color: #ffffff;
+  margin-right: 1rem !important;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.quarto-banner nav.quarto-secondary-nav {
+  border-top: 1px solid #660033;
+  border-bottom: 4px solid #660033;
+}
