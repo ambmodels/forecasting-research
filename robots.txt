@@ -1,1 +1,1 @@
-Sitemap: https://amyheather.github.io/forecasting/sitemap.xml
+Sitemap: https://ambmodels.github.io/forecasting-research/sitemap.xml
