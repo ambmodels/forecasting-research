@@ -261,11 +261,30 @@ background-size: cover;
 <p>SWAST have historical temperature data from 2017 to 2025 for every weather station in the South West and can help get any other weather type data eg. rainfall, wind, snow if useful.</p>
 <p>SWAST also have an API that can download the seasonal disease info from UKHSA every week.</p>
 <p><em>Additional notes: Relationship potentially changed since COVID? Also, Nav shared <a href="https://doi.org/10.1057/jors.2011.160" class="uri">https://doi.org/10.1057/jors.2011.160</a>.</em></p>
+<blockquote class="blockquote">
+<p>Tom said we need to think about temperature data… if you are training on actual data, but then using forecast in forecast… forecast comes with uncertainty… incorporate? Paul Harper Cardiff may have done some stuff around this, Bayesian, emergency admissions.</p>
+<p>Also, Tom gave ideas around improved models. Suggested worry less about point forecast, and focus more on trying to shrink prediction intervals while maintaining good coverage.</p>
+<p>Model ideas…</p>
+<ul>
+<li>Improved ensemble. Prophet prediction - get a time series of errors If you subtracted the error from your forecast, you would true result Hence, lets train an ARIMA model on those errors, and forecast the error in our forecast, alongside our actual forecast If we then add our forecast + our predicted error in the forecast, hopefully gives you a better prediction.</li>
+<li>London Ambulance Service might be doing something similar… Generalised additive model.</li>
+<li>Bahan Professor Cardiff has probably done some good stuff around forecasting in R that we could check out… open, R, Rob Heindman.</li>
+</ul>
+</blockquote>
 </section>
 <section id="prediction-intervals-in-long-term-forecasts" class="level2">
 <h2 class="anchored" data-anchor-id="prediction-intervals-in-long-term-forecasts">Prediction intervals in long term forecasts</h2>
 <p>Want to improve prediction/uncertainty intervals for longer forecasts (e.g., several months).</p>
-<p>Consider conformal prediction.</p>
+<blockquote class="blockquote">
+<p>Tom spoke about how current ensemble approach of just taking a mean of prediction intervals could be improved. Suggestions of things to look into:</p>
+<ul>
+<li>Quantile regression…</li>
+<li>Bayesian…</li>
+<li>Conformal prediction - take initial predict set and calibrate on out-of-sample validation data</li>
+<li>Bootstrapping - repeated sampling historical residuals, generate forecast new for each sample, evaluate variance across iterations to form interval.</li>
+<li>Might be called “sample paths” in Hyndman.</li>
+</ul>
+</blockquote>
 </section>
 <section id="handling-covid-data" class="level2">
 <h2 class="anchored" data-anchor-id="handling-covid-data">Handling COVID data</h2>
